@@ -115,10 +115,11 @@ var scene = (function () {
             state.frame = 0;
         }
 
+        state.percentDone = state.frame / state.maxFrame;
+
         // call the forFrame method;
         state.forFrame.call(state);
 
-        state.percentDone = state.frame / state.maxFrame;
 
     };
 

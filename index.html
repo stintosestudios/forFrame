@@ -21,7 +21,7 @@
         scene({
 
             // define some parts
-            parts : [{id:'myBox',w:32,h:32}, {id:'otherBox',w:32,h:32}],
+            parts : [{id:'myBox',w:32,h:32}],
 
             // define the forFrame movement
             forFrame : function(){
@@ -31,13 +31,6 @@
                 pt.y = 10 + Math.pow(2,this.percentDone * 8.8);
                 pt.x = 10 + this.percentDone * 598;
 
-                pt = this.parts['otherBox'];
-
-                pt.y = 400 - 390 * this.percentDone;
-                pt.x = 598 - 598 * this.percentDone;
-                pt.w = 32 + 400 * this.percentDone;
-                pt.h = 32 + 400 * this.percentDone;
-
             }
 
         });
@@ -46,10 +39,12 @@
         scene.injectCanvas('apparea');
 
         // jump to a given frame
-        //scene.setFrame(49);
+        scene.setFrame(14);
+
+        scene.renderFrame();
 
         // play the scene
-        scene.play();
+        //scene.play();
 
         </script>
 
