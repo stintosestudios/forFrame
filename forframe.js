@@ -6,10 +6,42 @@ var scene = (function () {
         frame : 0,
         maxFrame : 50,
         percentDone : 0,
+        sections : {},
+        sectionPer : 0,
         forFrame : null,
         parts : [],
         canvas : null,
-        ctx : null
+        ctx : null,
+
+        currentSection : function () {
+
+            console.log('percent done: ' + this.percentDone);
+            console.log('timeline array:');
+            console.log(this.sections.timeline);
+
+            var i = 0,
+            timeline = this.sections.timeline,
+            len = timeline.length;
+            while (i < len) {
+
+                if (this.percentDone < timeline[i][1]) {
+
+                    break;
+
+                }
+
+                i += 1;
+
+            }
+
+            console.log('current section index: ' + i);
+
+            this.sectionPer = this.percentDone / timeline[i][1];
+
+            // run the current section forFrame method.
+            this.sections.forFrame[timeline[i][0]].call(this);
+
+        }
 
     };
 
@@ -50,7 +82,7 @@ var scene = (function () {
         }
 
         // default to 50 frames if maxFrame is not given
-        state.maxFrame = options.maxFrame ? options.maxFrame: 50;
+        state.maxFrame = options.maxFrame ? options.maxFrame : 50;
 
         // setup parts array.
         state.parts = {};
@@ -61,6 +93,40 @@ var scene = (function () {
         });
 
         state.forFrame = options.forFrame;
+
+        // setup sections if given
+        if (options.sections) {
+
+            (function () {
+
+                var secValues = options.sections.timeline.split(';');
+
+                console.log('section object given');
+
+                state.sections = {
+
+                    timeline : [],
+
+                    // referencing options for now.
+                    forFrame : options.sections.forFrame
+
+                };
+
+                // build timeline array
+                secValues.forEach(function (secVal) {
+
+                    secVal = secVal.split(':');
+                    secVal[1] = secVal[1] / 100;
+
+                    state.sections.timeline.push(secVal);
+
+                });
+
+                console.log(state);
+
+            }
+                ());
+        }
 
     };
 
@@ -100,11 +166,11 @@ var scene = (function () {
 
             ctx.save();
 
-            ctx.translate(pt.x + pt.w / 2,pt.y + pt.h / 2);
+            ctx.translate(pt.x + pt.w / 2, pt.y + pt.h / 2);
 
             ctx.rotate(pt.radian);
 
-            ctx.strokeRect( -pt.w / 2 , -pt.h / 2, pt.w, pt.h);
+            ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
 
             ctx.restore();
 
@@ -129,7 +195,6 @@ var scene = (function () {
         // call the forFrame method;
         state.forFrame.call(state);
 
-
     };
 
     // step the current frame
@@ -139,7 +204,6 @@ var scene = (function () {
 
         state.frame += rate;
         api.setFrame(state.frame);
-
 
     };
 

@@ -5,14 +5,12 @@ scene({
     maxFrame : 100,
 
     // define some parts
-    parts : [
-        {
+    parts : [{
             id : 'box',
             w : 64,
             h : 64
 
-        },
-        {
+        }, {
             id : 'sectionBox',
             w : 128,
             h : 128
@@ -24,35 +22,26 @@ scene({
     sections : {
 
         // the section timeline
-        timeLine : 'open:25%;hold:50%;close:25%',
+        timeline : 'open:25;hold:75;close:100',
 
-        forFrame : [
+        forFrame : {
 
             // an opening animation method
-            {
+            open : function () {
 
-                id : 'open',
-                forFrame : function () {}
+                var pt = this.parts['sectionBox'];
+
+                pt.x = 0 + (320 - 64) * this.sectionPer;
 
             },
 
             // hold a static state
-            {
-
-                id : 'hold',
-                forFrame : function () {}
-
-            },
+            hold : function () {},
 
             // close animation
-            {
+            close : function () {}
 
-                id : 'close',
-                forFrame : function () {}
-
-            }
-
-        ]
+        }
     },
 
     forFrame : function () {
@@ -60,11 +49,11 @@ scene({
         var pt = this.parts['box'];
 
         // use currentSection
-        //this.currentSection();
+        this.currentSection();
 
         // you can do something else that goes on for the whole animaion
 
-        pt.y = 480-64;
+        pt.y = 480 - 64;
         pt.x = -64 + 704 * this.percentDone;
 
     }
@@ -73,6 +62,11 @@ scene({
 
 // inject a canvas into an element with an id of 'apparea'.
 scene.injectCanvas('apparea');
+
+// jump to a given frame
+//scene.setFrame(30);
+
+scene.renderFrame();
 
 // play the scene
 scene.play();
