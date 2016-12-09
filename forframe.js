@@ -4,7 +4,7 @@ var scene = (function () {
     var state = {
 
         frame : 0,
-        maxFrame : 50,
+        maxFrame : 60,
         percentDone : 0,
         forFrame : null,
         parts : [],

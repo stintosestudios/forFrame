@@ -20,6 +20,7 @@ scene({
         findSectionPer = function () {
 
             sectionPer = this.percentDone - 1 / sections.length * sectionIndex;
+            sectionPer = sectionPer / (1 / sections.length);
 
         };
 
@@ -30,7 +31,16 @@ scene({
 
                 var pt = this.parts['footarea'];
 
-                pt.y = 240 - 64 + 200 * sectionPer;
+                pt.y = 240 - 64;
+                pt.x = 320 - 32;
+                pt.radian = 1.25 - 2.5 * sectionPer;
+
+            },
+            function () {
+
+                var pt = this.parts['footarea'];
+
+                pt.y = 240 - 64;
                 pt.x = 320 - 32;
 
             },
@@ -38,18 +48,9 @@ scene({
 
                 var pt = this.parts['footarea'];
 
-                pt.y = 240 - 64 + 66;
-                pt.x = 320 - 32 + 200 * sectionPer;
-
-            },
-            function () {
-
-                var pt = this.parts['footarea'];
-
-                var delta = 66 * (sectionPer / 0.33);
-
-                pt.y = 240 - 64 + 66 - delta;
-                pt.x = 320 - 32 + 66 - delta;
+                pt.y = 240 - 64;
+                pt.x = 320 - 32;
+                pt.radian = (6.28 - 1.25) + 2.5 * sectionPer;
 
             },
 
@@ -66,6 +67,12 @@ scene({
 
             sections[sectionIndex].call(this);
 
+			
+				
+                //console.log('section per: ' + sectionPer);
+
+				
+			
             //console.log(section);
 
             //console.log(this);
@@ -82,7 +89,7 @@ scene({
 scene.injectCanvas('apparea');
 
 // jump to a given frame
-scene.setFrame(1);
+//scene.setFrame(21);
 
 scene.renderFrame();
 
