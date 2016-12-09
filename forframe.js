@@ -4,7 +4,7 @@ var scene = (function () {
     var state = {
 
         frame : 0,
-        maxFrame : 60,
+        maxFrame : 50,
         percentDone : 0,
         forFrame : null,
         parts : [],
@@ -22,8 +22,6 @@ var scene = (function () {
         this.x = 0;
         this.y = 0;
         this.radian = 0;
-
-        console.log('new part');
 
     };
 
@@ -50,6 +48,9 @@ var scene = (function () {
             throw new Error('you must define a forFrame method, see the README.');
 
         }
+
+        // default to 50 frames if maxFrame is not given
+        state.maxFrame = options.maxFrame ? options.maxFrame: 50;
 
         // setup parts array.
         state.parts = {};

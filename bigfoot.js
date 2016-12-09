@@ -67,16 +67,6 @@ scene({
 
             sections[sectionIndex].call(this);
 
-			
-				
-                //console.log('section per: ' + sectionPer);
-
-				
-			
-            //console.log(section);
-
-            //console.log(this);
-
         };
 
     }
