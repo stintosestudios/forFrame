@@ -15,38 +15,7 @@
 
         <script src="forframe.js"></script>
 
-        <script>
-
-        // start by setting up the scene
-        scene({
-
-            // define some parts
-            parts : [{id:'myBox',w:32,h:32}],
-
-            // define the forFrame movement
-            forFrame : function(){
-
-                var pt = this.parts['myBox'];
-
-                pt.y = 10 + Math.pow(2,this.percentDone * 8.8);
-                pt.x = 10 + this.percentDone * 598;
-
-            }
-
-        });
-
-        // inject a canvas into the given id.
-        scene.injectCanvas('apparea');
-
-        // jump to a given frame
-        scene.setFrame(14);
-
-        scene.renderFrame();
-
-        // play the scene
-        //scene.play();
-
-        </script>
+        <script src="bigfoot.js"></script>
 
     </body>
 

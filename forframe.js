@@ -97,7 +97,15 @@ var scene = (function () {
 
             ctx.strokeStyle = '#ffffff';
 
-            ctx.strokeRect(pt.x, pt.y, pt.w, pt.h);
+            ctx.save();
+
+            ctx.translate(pt.x + pt.w / 2,pt.y + pt.h / 2);
+
+            ctx.rotate(pt.radian);
+
+            ctx.strokeRect( -pt.w / 2 , -pt.h / 2, pt.w, pt.h);
+
+            ctx.restore();
 
         }
 
