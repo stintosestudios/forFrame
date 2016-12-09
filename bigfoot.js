@@ -13,15 +13,24 @@ scene({
     // define the forFrame movement
     forFrame : (function () {
 
-        var sectionIndex = 0;
+        var sectionIndex = 0,
 
+        sectionPer,
+
+        findSectionPer = function () {
+
+            sectionPer = this.percentDone - 1 / sections.length * sectionIndex;
+
+        };
+
+        // animation sections
         var sections = [
 
             function () {
 
                 var pt = this.parts['footarea'];
 
-                pt.y = 240 - 64 + 200 * this.percentDone;
+                pt.y = 240 - 64 + 200 * sectionPer;
                 pt.x = 320 - 32;
 
             },
@@ -30,14 +39,14 @@ scene({
                 var pt = this.parts['footarea'];
 
                 pt.y = 240 - 64 + 66;
-                pt.x = 320 - 32 + 200 * (this.percentDone - 0.33);
+                pt.x = 320 - 32 + 200 * sectionPer;
 
             },
             function () {
 
                 var pt = this.parts['footarea'];
 
-                var delta = 66 * ((this.percentDone - 0.66) / 0.33);
+                var delta = 66 * (sectionPer / 0.33);
 
                 pt.y = 240 - 64 + 66 - delta;
                 pt.x = 320 - 32 + 66 - delta;
@@ -53,7 +62,9 @@ scene({
 
             sectionIndex = Math.floor(this.frame / (this.maxFrame / 3));
 
-            sections[sectionIndex].call(this)
+            findSectionPer.call(this);
+
+            sections[sectionIndex].call(this);
 
             //console.log(section);
 
