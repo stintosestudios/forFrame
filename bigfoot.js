@@ -2,76 +2,64 @@
 // start by setting up the scene
 scene({
 
+    maxFrame : 100,
+
     // define some parts
     parts : [{
             id : 'footarea',
             w : 64,
             h : 128
+        }, {
+            id : 'headarea',
+            w : 64,
+            h : 64
         }
     ],
 
+    sections : {
+
+        timeline : 'back:10;hold:30;forward:100',
+
+        forFrame : {
+
+            back : function () {
+
+                var pt = this.parts['footarea'];
+                pt.y = 240 - 64;
+                pt.x = 320 - 32;
+                pt.radian = 1.25 - 2.5 * this.sectionPer;
+
+            },
+
+            hold : function () {
+
+                var pt = this.parts['footarea'];
+                pt.y = 240 - 64;
+                pt.x = 320 - 32;
+                pt.radian = 1.25 - 2.5;
+
+            },
+
+            forward : function () {
+
+                var pt = this.parts['footarea'];
+
+                pt.y = 240 - 64;
+                pt.x = 320 - 32;
+                pt.radian = (6.28 - 1.25) + 2.5 * this.sectionPer;
+
+            }
+
+        }
+
+    },
+
     // define the forFrame movement
-    forFrame : (function () {
+    forFrame : function(){
 
-        var sectionIndex = 0,
-
-        sectionPer,
-
-        findSectionPer = function () {
-
-            sectionPer = this.percentDone - 1 / sections.length * sectionIndex;
-            sectionPer = sectionPer / (1 / sections.length);
-
-        };
-
-        // animation sections
-        var sections = [
-
-            function () {
-
-                var pt = this.parts['footarea'];
-
-                pt.y = 240 - 64;
-                pt.x = 320 - 32;
-                pt.radian = 1.25 - 2.5 * sectionPer;
-
-            },
-            function () {
-
-                var pt = this.parts['footarea'];
-
-                pt.y = 240 - 64;
-                pt.x = 320 - 32;
-
-            },
-            function () {
-
-                var pt = this.parts['footarea'];
-
-                pt.y = 240 - 64;
-                pt.x = 320 - 32;
-                pt.radian = (6.28 - 1.25) + 2.5 * sectionPer;
-
-            },
-
-        ];
-
-        // the function that will be called on each update
-        return function () {
-
-            //pt.radian = 6.28 * this.percentDone;
-
-            sectionIndex = Math.floor(this.frame / (this.maxFrame / 3));
-
-            findSectionPer.call(this);
-
-            sections[sectionIndex].call(this);
-
-        };
+        this.currentSection();
 
     }
-
-        ())
 
 });
 
