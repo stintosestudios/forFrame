@@ -24,29 +24,36 @@ scene({
 
             back : function () {
 
-                var pt = this.parts['footarea'];
-                pt.y = 240 - 64;
-                pt.x = 320 - 32;
-                pt.radian = 1.25 - 2.5 * this.sectionPer;
+                var pt = this.parts['footarea'],
+                radian = 1.25 - 2.5 * this.sectionPer;
+
+                pt.x = -32 + 320;
+                pt.y = -64 + 240;
+                pt.radian = radian;
+
+                return radian;
 
             },
 
             hold : function () {
 
-                var pt = this.parts['footarea'];
-                pt.y = 240 - 64;
-                pt.x = 320 - 32;
-                pt.radian = 1.25 - 2.5;
+                var pt = this.parts['footarea'],
+                radian = 1.25 - 2.5;
+
+                pt.radian = radian;
+
+                return radian;
 
             },
 
             forward : function () {
 
-                var pt = this.parts['footarea'];
+                var pt = this.parts['footarea'],
+                radian = (6.28 - 1.25) + 2.5 * this.sectionPer;
 
-                pt.y = 240 - 64;
-                pt.x = 320 - 32;
-                pt.radian = (6.28 - 1.25) + 2.5 * this.sectionPer;
+                pt.radian = radian;
+
+                return radian;
 
             }
 
@@ -55,9 +62,14 @@ scene({
     },
 
     // define the forFrame movement
-    forFrame : function(){
+    forFrame : function () {
 
-        this.currentSection();
+        var radian = this.currentSection();
+
+        // the head always moves with the current radian from the current section method.
+        pt = this.parts['headarea'];
+        pt.y = 176 + Math.cos(Math.PI - radian) * 64;
+        pt.x = 288 + Math.sin(Math.PI - radian) * 64;
 
     }
 
@@ -67,9 +79,9 @@ scene({
 scene.injectCanvas('apparea');
 
 // jump to a given frame
-//scene.setFrame(21);
+//scene.setFrame(0);
 
-scene.renderFrame();
+//scene.renderFrame();
 
 // play the scene
 scene.play();

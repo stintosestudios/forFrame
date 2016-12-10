@@ -30,12 +30,12 @@ var scene = (function () {
 
             }
 
-			var bias = i === 0 ? 0 : timeline[i-1][1];
-			
+            var bias = i === 0 ? 0 : timeline[i-1][1];
+
             this.sectionPer = (this.percentDone - bias) / (timeline[i][1] - bias);
 
-            // run the current section forFrame method.
-            this.sections.forFrame[timeline[i][0]].call(this);
+            // run the current section forFrame method, and return anything it returns.
+            return this.sections.forFrame[timeline[i][0]].call(this);
 
         }
 
