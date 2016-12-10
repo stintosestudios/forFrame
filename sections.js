@@ -76,9 +76,5 @@ scene({
 // inject a canvas into an element with an id of 'apparea'.
 scene.injectCanvas('apparea');
 
-// jump to a given frame
-//scene.setFrame(99);
-//scene.renderFrame();
-
 // play the scene
 scene.play();
