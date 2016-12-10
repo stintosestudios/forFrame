@@ -2,7 +2,7 @@
 
 scene({
 
-    maxFrame : 100,
+    maxFrame : 200,
 
     // define some parts
     parts : [{
@@ -30,19 +30,18 @@ scene({
             open : function () {
 
                 var pt = this.parts['sectionBox'];
-
-                pt.x = 0 + (320 - 64) * this.sectionPer;
+                pt.x = -64 + (384 - 64) * this.sectionPer;
+                pt.y = 180;
+                pt.radian = 0;
 
             },
 
             // hold a static state
             hold : function () {
 
-			   
                 var pt = this.parts['sectionBox'];
-
-			
-                pt.x = 320 - 64;
+                //pt.x = 320 - 64;
+                pt.radian = 1 * this.sectionPer;
 
             },
 
@@ -50,8 +49,9 @@ scene({
             close : function () {
 
                 var pt = this.parts['sectionBox'];
-
-                pt.x = (320 - 64) + 320 * this.sectionPer;
+                pt.x = (320 - 64) + 500 * this.sectionPer;
+                pt.y = 180 + 500 * this.sectionPer;
+                pt.radian = 1;
 
             }
 
@@ -66,7 +66,6 @@ scene({
         this.currentSection();
 
         // you can do something else that goes on for the whole animaion
-
         pt.y = 480 - 64;
         pt.x = -64 + 704 * this.percentDone;
 
@@ -82,4 +81,4 @@ scene.injectCanvas('apparea');
 //scene.renderFrame();
 
 // play the scene
- scene.play();
+scene.play();
