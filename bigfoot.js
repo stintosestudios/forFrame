@@ -13,12 +13,16 @@ scene({
             id : 'headarea',
             w : 64,
             h : 64
+        }, {
+            id : 'floor',
+            w : 640,
+            h : 400
         }
     ],
 
     sections : {
 
-        timeline : 'back:10;hold:30;forward:100',
+        timeline : 'back:10;hold:50;forward:100',
 
         forFrame : {
 
@@ -31,6 +35,9 @@ scene({
                 pt.y = -64 + 240;
                 pt.radian = radian;
 
+                pt = this.parts['floor'];
+                pt.y = 480 - (400 - 400 * this.sectionPer);
+
                 return radian;
 
             },
@@ -42,6 +49,9 @@ scene({
 
                 pt.radian = radian;
 
+                pt = this.parts['floor'];
+                pt.y = 480;
+
                 return radian;
 
             },
@@ -52,6 +62,9 @@ scene({
                 radian = (6.28 - 1.25) + 2.5 * this.sectionPer;
 
                 pt.radian = radian;
+
+                pt = this.parts['floor'];
+                pt.y = 480 - (400 * this.sectionPer);
 
                 return radian;
 
