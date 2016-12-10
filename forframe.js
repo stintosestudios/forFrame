@@ -15,10 +15,6 @@ var scene = (function () {
 
         currentSection : function () {
 
-            console.log('percent done: ' + this.percentDone);
-            console.log('timeline array:');
-            console.log(this.sections.timeline);
-
             var i = 0,
             timeline = this.sections.timeline,
             len = timeline.length;
@@ -34,9 +30,9 @@ var scene = (function () {
 
             }
 
-            console.log('current section index: ' + i);
-
-            this.sectionPer = this.percentDone / timeline[i][1];
+			var bias = i === 0 ? 0 : timeline[i-1][1];
+			
+            this.sectionPer = (this.percentDone - bias) / (timeline[i][1] - bias);
 
             // run the current section forFrame method.
             this.sections.forFrame[timeline[i][0]].call(this);
@@ -101,8 +97,6 @@ var scene = (function () {
 
                 var secValues = options.sections.timeline.split(';');
 
-                console.log('section object given');
-
                 state.sections = {
 
                     timeline : [],
@@ -121,8 +115,6 @@ var scene = (function () {
                     state.sections.timeline.push(secVal);
 
                 });
-
-                console.log(state);
 
             }
                 ());

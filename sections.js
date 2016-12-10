@@ -36,10 +36,24 @@ scene({
             },
 
             // hold a static state
-            hold : function () {},
+            hold : function () {
+
+			   
+                var pt = this.parts['sectionBox'];
+
+			
+                pt.x = 320 - 64;
+
+            },
 
             // close animation
-            close : function () {}
+            close : function () {
+
+                var pt = this.parts['sectionBox'];
+
+                pt.x = (320 - 64) + 320 * this.sectionPer;
+
+            }
 
         }
     },
@@ -64,9 +78,8 @@ scene({
 scene.injectCanvas('apparea');
 
 // jump to a given frame
-//scene.setFrame(30);
-
-scene.renderFrame();
+//scene.setFrame(99);
+//scene.renderFrame();
 
 // play the scene
-scene.play();
+ scene.play();
