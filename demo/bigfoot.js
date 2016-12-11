@@ -8,7 +8,14 @@ scene({
     parts : [{
             id : 'footarea',
             w : 64,
-            h : 128
+            h : 128,
+
+            skin : {
+
+                imgIndex : 0
+
+            }
+
         }, {
             id : 'headarea',
             w : 64,
@@ -91,10 +98,18 @@ scene({
 // inject a canvas into the given id.
 scene.injectCanvas('apparea');
 
+scene.load(['demo/img/monty_python_foot.png'], function () {
+
+    console.log('okay looking good I think');
+
+    scene.play();
+
+});
+
 // jump to a given frame
 //scene.setFrame(0);
 
 //scene.renderFrame();
 
 // play the scene
-scene.play();
+//scene.play();

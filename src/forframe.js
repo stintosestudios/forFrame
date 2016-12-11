@@ -9,10 +9,12 @@ var scene = (function () {
         sections : {},
         sectionPer : 0,
         forFrame : null,
+        img : [],
         parts : [],
         canvas : null,
         ctx : null,
 
+        // run the current section forFrame method
         currentSection : function () {
 
             var i = 0,
@@ -30,7 +32,7 @@ var scene = (function () {
 
             }
 
-            var bias = i === 0 ? 0 : timeline[i-1][1];
+            var bias = i === 0 ? 0 : timeline[i - 1][1];
 
             this.sectionPer = (this.percentDone - bias) / (timeline[i][1] - bias);
 
@@ -50,6 +52,14 @@ var scene = (function () {
         this.x = 0;
         this.y = 0;
         this.radian = 0;
+
+        this.skin = undefined;
+
+        if (values.skin) {
+
+            this.skin = values.skin;
+
+        }
 
     };
 
@@ -162,7 +172,21 @@ var scene = (function () {
 
             ctx.rotate(pt.radian);
 
-            ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
+            if (pt.skin) {
+
+                // if we have a skin for the part use the skin
+
+                ctx.strokeStyle = '#ff0000';
+                ctx.drawImage(state.img[0],-pt.w / 2, -pt.h / 2, pt.w, pt.h);
+                ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
+
+            } else {
+
+                // if no skin just draw a box
+
+                ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
+
+            }
 
             ctx.restore();
 
@@ -196,6 +220,36 @@ var scene = (function () {
 
         state.frame += rate;
         api.setFrame(state.frame);
+
+    };
+
+    api.load = function (urlList, done) {
+
+        var img;
+
+        if (done === undefined) {
+            done = function () {};
+        }
+
+        state.img = [];
+
+        urlList.forEach(function (url) {
+
+            img = new Image();
+
+            img.addEventListener('load', function () {
+
+                console.log('image loaded');
+
+                done();
+
+            });
+
+            img.src = url;
+
+            state.img.push(img);
+
+        });
 
     };
 
