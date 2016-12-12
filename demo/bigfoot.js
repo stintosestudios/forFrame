@@ -18,8 +18,8 @@ scene({
 
         }, {
             id : 'headarea',
-            w : 64,
-            h : 64
+            w : 96,
+            h : 96
         }, {
             id : 'floor',
             w : 640,
@@ -43,7 +43,7 @@ scene({
                 pt.radian = radian;
 
                 pt.skin.xOffset = -20;
-                pt.skin.yOffset = -25;
+                pt.skin.yOffset = -20;
 
                 pt = this.parts['floor'];
                 pt.y = 480 - (400 - 400 * this.sectionPer);
@@ -91,8 +91,11 @@ scene({
 
         // the head always moves with the current radian from the current section method.
         pt = this.parts['headarea'];
-        pt.y = 176 + Math.cos(Math.PI - radian) * 64;
-        pt.x = 288 + Math.sin(Math.PI - radian) * 64;
+        //pt.y = (176 - 32) + Math.cos(Math.PI - radian) * 64;
+        //pt.x = (288 - 32) + Math.sin(Math.PI - radian) * 128;
+
+        pt.x = (320-48) + Math.sin(Math.PI - radian) * 80;
+        pt.y = (240-48) + Math.cos(Math.PI - radian) * 80;
 
     }
 
