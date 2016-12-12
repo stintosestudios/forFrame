@@ -2,17 +2,30 @@
 // start by setting up the scene
 scene({
 
-    maxFrame : 120,
+    maxFrame : 160,
 
     // define some parts
     parts : [{
+            id : 'background',
+            w : 640,
+            h : 480,
+
+            skin : {
+
+                imgIndex : 2
+
+            }
+
+        }, {
             id : 'footarea',
             w : 64,
             h : 128,
 
             skin : {
 
-                imgIndex : 0
+                imgIndex : 0,
+                sw : 93,
+                sh : 85
 
             }
 
@@ -124,7 +137,13 @@ scene({
 // inject a canvas into the given id.
 scene.injectCanvas('apparea');
 
-scene.load(['demo/img/foot.png', 'demo/img/pathead.png'], function () {
+scene.load(
+    [
+        'demo/img/foot.png',
+        'demo/img/pathead.png',
+        'demo/img/background1.png'
+    ],
+    function () {
 
     console.log('okay looking good I think');
 

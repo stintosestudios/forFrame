@@ -44,13 +44,26 @@ var scene = (function () {
     };
 
     // The Skin Class is used to skin a Part with an image
-    var Skin = function (imgIndex) {
+    var Skin = function (part, skinOptions) {
 
         // an imgIndex of -1 means unskined.
-        this.imgIndex = imgIndex === undefined ? -1 : imgIndex;
+        this.imgIndex = -1;
         this.xOffset = 0;
         this.yOffset = 0;
+        this.sx = 0;
+        this.sy = 0;
+        this.sw = 32;
+        this.sh = 32;
+
         this.renderPartBox = false;
+
+        if (skinOptions) {
+
+            this.imgIndex = skinOptions.imgIndex === undefined ? -1 : skinOptions.imgIndex;
+            this.sw = skinOptions.sw === undefined ? part.w : skinOptions.sw;
+            this.sh = skinOptions.sh === undefined ? part.h : skinOptions.sh;
+
+        }
 
     };
 
@@ -65,13 +78,15 @@ var scene = (function () {
         this.radian = 0;
 
         // default that Parts skin to a blank Skin class instance
-        this.skin = new Skin();
+        this.skin = new Skin(this, values.skin);
 
+        /*
         if (values.skin) {
 
-            this.skin = new Skin(values.skin.imgIndex);
+        this.skin = new Skin(values.skin.imgIndex);
 
         }
+         */
 
     };
 
@@ -188,7 +203,16 @@ var scene = (function () {
 
                 // if we have a skin for the part use the skin
                 ctx.strokeStyle = '#ff0000';
-                ctx.drawImage(state.img[skin.imgIndex], -pt.w / 2 + skin.xOffset, -pt.h / 2 + skin.yOffset, pt.w, pt.h);
+                ctx.drawImage(
+                    state.img[skin.imgIndex],
+                    skin.sx,
+                    skin.sy,
+                    skin.sw,
+                    skin.sh,
+                    -pt.w / 2 + skin.xOffset,
+                    -pt.h / 2 + skin.yOffset,
+                    pt.w,
+                    pt.h);
 
                 if (skin.renderPartBox) {
                     ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
