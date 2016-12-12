@@ -2,7 +2,7 @@
 // start by setting up the scene
 scene({
 
-    maxFrame : 240,
+    maxFrame : 120,
 
     // define some parts
     parts : [{
@@ -44,7 +44,7 @@ scene({
 
                 var pt = this.parts['footarea'],
                 //radian = 1.25 - 2.5 * this.sectionPer;
-				radian = 0.5 - 1.5 * this.sectionPer;
+                radian = 0.5 - 1.5 * this.sectionPer;
 
                 pt.x = -32 + 320;
                 pt.y = -64 + 240;
@@ -58,8 +58,8 @@ scene({
 
                 pt = this.parts['headarea'];
 
-                pt.radian = 0.2+ 0.4 * this.sectionPer;
-				
+                pt.radian = 0.2 + 0.4 * this.sectionPer;
+
                 return radian;
 
             },
@@ -69,7 +69,7 @@ scene({
                 var pt = this.parts['footarea'],
                 //radian = 1.25 - 2.5;
                 radian = -1;
-				
+
                 pt.radian = radian;
 
                 pt = this.parts['floor'];
@@ -77,7 +77,7 @@ scene({
 
                 pt = this.parts['headarea'];
 
-				pt.radian = 0.6;
+                pt.radian = 0.6;
 
                 return radian;
 
@@ -88,8 +88,8 @@ scene({
                 var pt = this.parts['footarea'],
                 //radian = (6.28 - 1.25) + 2.5 * this.sectionPer;
 
-				radian = -1 + 1.5 * this.sectionPer;;
-				
+                radian = -1 + 1.5 * this.sectionPer; ;
+
                 pt.radian = radian;
 
                 pt = this.parts['floor'];
@@ -128,14 +128,11 @@ scene.load(['demo/img/foot.png', 'demo/img/pathead.png'], function () {
 
     console.log('okay looking good I think');
 
+    // jump to a given frame
+    //scene.setFrame(0);
+
+    //scene.renderFrame();
+
     scene.play();
 
 });
-
-// jump to a given frame
-//scene.setFrame(0);
-
-//scene.renderFrame();
-
-// play the scene
-//scene.play();

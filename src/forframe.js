@@ -50,6 +50,7 @@ var scene = (function () {
         this.imgIndex = imgIndex === undefined ? -1 : imgIndex;
         this.xOffset = 0;
         this.yOffset = 0;
+        this.renderPartBox = false;
 
     };
 
@@ -188,7 +189,11 @@ var scene = (function () {
                 // if we have a skin for the part use the skin
                 ctx.strokeStyle = '#ff0000';
                 ctx.drawImage(state.img[skin.imgIndex], -pt.w / 2 + skin.xOffset, -pt.h / 2 + skin.yOffset, pt.w, pt.h);
-                ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
+
+                if (skin.renderPartBox) {
+                    ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
+
+                }
 
             } else {
 
