@@ -43,6 +43,14 @@ var scene = (function () {
 
     };
 
+    // The Skin Class is used to skin a Part with an image
+    var Skin = function (imgIndex) {
+
+        // an imgIndex of -1 means unskined.
+        this.imgIndex = imgIndex === undefined ? -1 : imgIndex;
+
+    };
+
     // the Part Class.
     var Part = function (values) {
 
@@ -53,11 +61,12 @@ var scene = (function () {
         this.y = 0;
         this.radian = 0;
 
-        this.skin = undefined;
+        // default that Parts skin to a blank Skin class instance
+        this.skin = new Skin();
 
         if (values.skin) {
 
-            this.skin = values.skin;
+            this.skin = new Skin(values.skin.imgIndex);
 
         }
 
@@ -172,12 +181,12 @@ var scene = (function () {
 
             ctx.rotate(pt.radian);
 
-            if (pt.skin) {
+            if (pt.skin.imgIndex !== -1) {
 
                 // if we have a skin for the part use the skin
 
                 ctx.strokeStyle = '#ff0000';
-                ctx.drawImage(state.img[0],-pt.w / 2, -pt.h / 2, pt.w, pt.h);
+                ctx.drawImage(state.img[0], -pt.w / 2, -pt.h / 2, pt.w, pt.h);
                 ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
 
             } else {
