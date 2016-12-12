@@ -187,7 +187,7 @@ var scene = (function () {
 
                 // if we have a skin for the part use the skin
                 ctx.strokeStyle = '#ff0000';
-                ctx.drawImage(state.img[0], -pt.w / 2 + skin.xOffset, -pt.h / 2 + skin.yOffset, pt.w, pt.h);
+                ctx.drawImage(state.img[skin.imgIndex], -pt.w / 2 + skin.xOffset, -pt.h / 2 + skin.yOffset, pt.w, pt.h);
                 ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
 
             } else {

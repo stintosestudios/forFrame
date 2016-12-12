@@ -2,7 +2,7 @@
 // start by setting up the scene
 scene({
 
-    maxFrame : 100,
+    maxFrame : 240,
 
     // define some parts
     parts : [{
@@ -19,7 +19,14 @@ scene({
         }, {
             id : 'headarea',
             w : 96,
-            h : 96
+            h : 96,
+
+            skin : {
+
+                imgIndex : 1
+
+            }
+
         }, {
             id : 'floor',
             w : 640,
@@ -29,14 +36,15 @@ scene({
 
     sections : {
 
-        timeline : 'back:10;hold:50;forward:100',
+        timeline : 'back:10;hold:60;forward:100',
 
         forFrame : {
 
             back : function () {
 
                 var pt = this.parts['footarea'],
-                radian = 1.25 - 2.5 * this.sectionPer;
+                //radian = 1.25 - 2.5 * this.sectionPer;
+				radian = 0.5 - 1.5 * this.sectionPer;
 
                 pt.x = -32 + 320;
                 pt.y = -64 + 240;
@@ -48,6 +56,10 @@ scene({
                 pt = this.parts['floor'];
                 pt.y = 480 - (400 - 400 * this.sectionPer);
 
+                pt = this.parts['headarea'];
+
+                pt.radian = 0.2+ 0.4 * this.sectionPer;
+				
                 return radian;
 
             },
@@ -55,12 +67,17 @@ scene({
             hold : function () {
 
                 var pt = this.parts['footarea'],
-                radian = 1.25 - 2.5;
-
+                //radian = 1.25 - 2.5;
+                radian = -1;
+				
                 pt.radian = radian;
 
                 pt = this.parts['floor'];
                 pt.y = 480;
+
+                pt = this.parts['headarea'];
+
+				pt.radian = 0.6;
 
                 return radian;
 
@@ -69,12 +86,17 @@ scene({
             forward : function () {
 
                 var pt = this.parts['footarea'],
-                radian = (6.28 - 1.25) + 2.5 * this.sectionPer;
+                //radian = (6.28 - 1.25) + 2.5 * this.sectionPer;
 
+				radian = -1 + 1.5 * this.sectionPer;;
+				
                 pt.radian = radian;
 
                 pt = this.parts['floor'];
                 pt.y = 480 - (400 * this.sectionPer);
+
+                pt = this.parts['headarea'];
+                pt.radian = 0.4 - 0.4 * this.sectionPer + 0.2;
 
                 return radian;
 
@@ -91,11 +113,9 @@ scene({
 
         // the head always moves with the current radian from the current section method.
         pt = this.parts['headarea'];
-        //pt.y = (176 - 32) + Math.cos(Math.PI - radian) * 64;
-        //pt.x = (288 - 32) + Math.sin(Math.PI - radian) * 128;
 
-        pt.x = (320-48) + Math.sin(Math.PI - radian) * 80;
-        pt.y = (240-48) + Math.cos(Math.PI - radian) * 80;
+        pt.x = (320 - 48) + Math.sin(Math.PI - radian) * 80;
+        pt.y = (240 - 48) + Math.cos(Math.PI - radian) * 80;
 
     }
 
@@ -104,7 +124,7 @@ scene({
 // inject a canvas into the given id.
 scene.injectCanvas('apparea');
 
-scene.load(['demo/img/monty_python_foot.png'], function () {
+scene.load(['demo/img/foot.png', 'demo/img/pathead.png'], function () {
 
     console.log('okay looking good I think');
 
