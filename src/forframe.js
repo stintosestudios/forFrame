@@ -48,6 +48,8 @@ var scene = (function () {
 
         // an imgIndex of -1 means unskined.
         this.imgIndex = imgIndex === undefined ? -1 : imgIndex;
+        this.xOffset = 0;
+        this.yOffset = 0;
 
     };
 
@@ -161,6 +163,7 @@ var scene = (function () {
     api.renderFrame = function () {
 
         var prop,
+        skin,
         pt,
         ctx = state.ctx;
 
@@ -174,19 +177,17 @@ var scene = (function () {
             pt = state.parts[prop];
 
             ctx.strokeStyle = '#ffffff';
-
             ctx.save();
-
             ctx.translate(pt.x + pt.w / 2, pt.y + pt.h / 2);
-
             ctx.rotate(pt.radian);
 
-            if (pt.skin.imgIndex !== -1) {
+            skin = pt.skin;
+
+            if (skin.imgIndex !== -1) {
 
                 // if we have a skin for the part use the skin
-
                 ctx.strokeStyle = '#ff0000';
-                ctx.drawImage(state.img[0], -pt.w / 2, -pt.h / 2, pt.w, pt.h);
+                ctx.drawImage(state.img[0], -pt.w / 2 + skin.xOffset, -pt.h / 2 + skin.yOffset, pt.w, pt.h);
                 ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
 
             } else {

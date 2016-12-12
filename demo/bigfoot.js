@@ -42,6 +42,9 @@ scene({
                 pt.y = -64 + 240;
                 pt.radian = radian;
 
+                pt.skin.xOffset = -20;
+                pt.skin.yOffset = -25;
+
                 pt = this.parts['floor'];
                 pt.y = 480 - (400 - 400 * this.sectionPer);
 
