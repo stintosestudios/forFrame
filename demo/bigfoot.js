@@ -2,7 +2,7 @@
 // start by setting up the scene
 scene({
 
-    maxFrame : 160,
+    maxFrame : 200,
 
     // define some parts
     parts : [{
@@ -12,7 +12,9 @@ scene({
 
             skin : {
 
-                imgIndex : 2
+                imgIndex : 2,
+                sw : 640,
+                sh : 480
 
             }
 
@@ -56,12 +58,13 @@ scene({
             back : function () {
 
                 var pt = this.parts['footarea'],
-                //radian = 1.25 - 2.5 * this.sectionPer;
                 radian = 0.5 - 1.5 * this.sectionPer;
 
                 pt.x = -32 + 320;
                 pt.y = -64 + 240;
                 pt.radian = radian;
+
+                pt.skin.renderPartBox = true;
 
                 pt.skin.xOffset = -20;
                 pt.skin.yOffset = -20;
@@ -70,7 +73,6 @@ scene({
                 pt.y = 480 - (400 - 400 * this.sectionPer);
 
                 pt = this.parts['headarea'];
-
                 pt.radian = 0.2 + 0.4 * this.sectionPer;
 
                 return radian;
@@ -80,10 +82,15 @@ scene({
             hold : function () {
 
                 var pt = this.parts['footarea'],
-                //radian = 1.25 - 2.5;
+
                 radian = -1;
 
+                pt.x = -32 + 320;
+                pt.y = -64 + 240;
+
                 pt.radian = radian;
+
+                pt.skin.renderPartBox = true;
 
                 pt = this.parts['floor'];
                 pt.y = 480;
@@ -99,11 +106,12 @@ scene({
             forward : function () {
 
                 var pt = this.parts['footarea'],
-                //radian = (6.28 - 1.25) + 2.5 * this.sectionPer;
+                radian = -1 + 1.5 * this.sectionPer;
 
-                radian = -1 + 1.5 * this.sectionPer; ;
-
+                pt.x = -32 + 320;
+                pt.y = -64 + 240;
                 pt.radian = radian;
+                pt.skin.renderPartBox = true;
 
                 pt = this.parts['floor'];
                 pt.y = 480 - (400 * this.sectionPer);
@@ -122,7 +130,10 @@ scene({
     // define the forFrame movement
     forFrame : function () {
 
-        var radian = this.currentSection();
+        var radian,
+        pt;
+
+        radian = this.currentSection();
 
         // the head always moves with the current radian from the current section method.
         pt = this.parts['headarea'];
@@ -130,6 +141,35 @@ scene({
         pt.x = (320 - 48) + Math.sin(Math.PI - radian) * 80;
         pt.y = (240 - 48) + Math.cos(Math.PI - radian) * 80;
 
+        pt = this.parts['background'];
+
+        /*
+        var pxD = 1280,
+        pxDH = pxD / 2,
+        bias = 1 - ((pxDH - pxD * this.percentDone) / pxDH);
+         */
+
+        //pt.skin.sx = 1280 - this.percentDone * 1280;
+
+        var d = 1280, // distance
+        dH = d / 2, // half distnace
+        log,
+        x;
+
+        log = Math.log(1 + (1-(this.percentDone / 0.5))) / Math.log(2);
+        x = dH * log;
+
+        if (this.percentDone >= 0.5) {
+
+            log = Math.log(2 - (1-((this.percentDone - 0.5) / 0.5)) * 1) / Math.log(2);
+            x = dH + (dH - (log * dH));
+
+        }
+
+        pt.skin.sx = x;
+
+		//console.log('sx = ' + pt.skin.sx);
+		
     }
 
 });
@@ -141,14 +181,14 @@ scene.load(
     [
         'demo/img/foot.png',
         'demo/img/pathead.png',
-        'demo/img/background1.png'
+        'demo/img/background2.png'
     ],
     function () {
 
     console.log('okay looking good I think');
 
     // jump to a given frame
-    //scene.setFrame(0);
+    //scene.setFrame(1);
 
     //scene.renderFrame();
 
