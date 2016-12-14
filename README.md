@@ -75,7 +75,7 @@ When defining a part you must at least give an id. If desired you can also set s
 
 ### forFrame
 
-The forFrame method is where the expressions what define the animation will be written. For each frame the main forFrame method will be called passing the current value of the inner state object that can be accessed via the this keyword.
+The forFrame method is where the expressions that define the animation will be written. For each frame the main forFrame method will be called passing the current value of the inner state object that can be accessed via the this keyword.
 
 
 ### Sections

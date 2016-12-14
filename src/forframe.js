@@ -4,7 +4,7 @@
  *    https://github.com/stintosestudios/forFrame
  *
  */
- 
+
 var scene = (function () {
 
     var state = {
@@ -16,7 +16,7 @@ var scene = (function () {
         sectionPer : 0,
         forFrame : null,
         img : [],
-        parts : [],
+        parts : {},
         canvas : null,
         ctx : null,
 
@@ -174,12 +174,15 @@ var scene = (function () {
     };
 
     // render the current frame
-    api.renderFrame = function () {
+    api.renderFrame = function (appendRender, appendZ) {
 
         var prop,
         skin,
         pt,
+        z = 0,
         ctx = state.ctx;
+
+        appendZ = appendZ === undefined ? Object.keys(state.parts).length-1: appendZ;
 
         // clear canvas.
         state.ctx.fillStyle = 'black';
@@ -187,6 +190,15 @@ var scene = (function () {
 
         // ALERT! a for in loop!? NO!
         for (prop in state.parts) {
+
+            // append render?
+            if (appendRender && z === appendZ) {
+
+                appendRender(ctx);
+
+            }
+
+            z += 1;
 
             pt = state.parts[prop];
 
@@ -213,6 +225,7 @@ var scene = (function () {
                     pt.h);
 
                 if (skin.renderPartBox) {
+
                     ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
 
                 }

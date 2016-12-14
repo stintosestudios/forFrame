@@ -143,14 +143,6 @@ scene({
 
         pt = this.parts['background'];
 
-        /*
-        var pxD = 1280,
-        pxDH = pxD / 2,
-        bias = 1 - ((pxDH - pxD * this.percentDone) / pxDH);
-         */
-
-        //pt.skin.sx = 1280 - this.percentDone * 1280;
-
         var d = 1280, // distance
         dH = d / 2, // half distnace
         log,
@@ -168,8 +160,6 @@ scene({
 
         pt.skin.sx = x;
 
-		//console.log('sx = ' + pt.skin.sx);
-		
     }
 
 });
@@ -185,13 +175,16 @@ scene.load(
     ],
     function () {
 
-    console.log('okay looking good I think');
-
     // jump to a given frame
-    //scene.setFrame(1);
+    scene.setFrame(1);
 
-    //scene.renderFrame();
+    scene.renderFrame(function(ctx){
+		
+		ctx.fillStyle = '#000000';
+		ctx.fillRect(0,0,20,20);
+		
+	});
 
-    scene.play();
+    //scene.play();
 
 });
