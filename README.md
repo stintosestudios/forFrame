@@ -293,7 +293,7 @@ This holds references the canvas DOM element, and the 2d drawing context.
 
 This is the method that is to be called in the main forFrame method if sections are being used. 
 
-   forFrame : function () { 
+    forFrame : function () { 
 
        var rad = this.currentSection(), 
 
@@ -303,7 +303,7 @@ This is the method that is to be called in the main forFrame method if sections 
 
 
 
-   } 
+    }
 
 state.currentSection returns whatever may be returned in the current section forFrame method. In the above example a radian value is being returned, the value of which may change based on different expressions from one section to another. 
 
