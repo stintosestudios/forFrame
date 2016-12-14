@@ -1,4 +1,10 @@
-
+/*
+ *    forFrame.js
+ *    Copyright 2016 by stintose studios (GPL v3)
+ *    https://github.com/stintosestudios/forFrame
+ *
+ */
+ 
 var scene = (function () {
 
     var state = {
@@ -79,14 +85,6 @@ var scene = (function () {
 
         // default that Parts skin to a blank Skin class instance
         this.skin = new Skin(this, values.skin);
-
-        /*
-        if (values.skin) {
-
-        this.skin = new Skin(values.skin.imgIndex);
-
-        }
-         */
 
     };
 
@@ -277,8 +275,6 @@ var scene = (function () {
             img = new Image();
 
             img.addEventListener('load', function () {
-
-                console.log('image loaded');
 
                 done();
 

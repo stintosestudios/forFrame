@@ -64,7 +64,7 @@ scene({
                 pt.y = -64 + 240;
                 pt.radian = radian;
 
-                pt.skin.renderPartBox = true;
+                //pt.skin.renderPartBox = true;
 
                 pt.skin.xOffset = -20;
                 pt.skin.yOffset = -20;
@@ -90,7 +90,7 @@ scene({
 
                 pt.radian = radian;
 
-                pt.skin.renderPartBox = true;
+                //pt.skin.renderPartBox = true;
 
                 pt = this.parts['floor'];
                 pt.y = 480;
@@ -111,7 +111,7 @@ scene({
                 pt.x = -32 + 320;
                 pt.y = -64 + 240;
                 pt.radian = radian;
-                pt.skin.renderPartBox = true;
+                //pt.skin.renderPartBox = true;
 
                 pt = this.parts['floor'];
                 pt.y = 480 - (400 * this.sectionPer);

@@ -272,3 +272,8 @@ A Skin class instance contains values that have to do with the “skinning” of a p
 ### Skin.sw
 ### Skin.sh
 ### Skin.renderPartBox
+
+## Legal
+
+    forFrame.js
+    Copyright 2016 by stintose studios GPL v3 (see LICENSE)
