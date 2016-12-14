@@ -15,29 +15,29 @@ As of this writing there is no way of defining a frame rate in the options objec
 
 If you just want to get started right away by starting a simple box animation you would use forframe.js like this, passing an options object to the scene global, and injecting a canvas into a container HTML element with an id of "apparea". 
 
-       // start by setting up the scene 
-       scene({ 
+    // start by setting up the scene 
+    scene({ 
 
-           // define some parts 
-           parts : [{id:'myBox',w:32,h:32}], 
+        // define some parts 
+        parts : [{id:'myBox',w:32,h:32}], 
 
-           // define the forFrame movement 
-           forFrame : function(){ 
+        // define the forFrame movement 
+        forFrame : function(){ 
 
-               var pt = this.parts['myBox']; 
+            var pt = this.parts['myBox']; 
 
-               pt.y = 10 + Math.pow(2,this.percentDone * 8.8); 
-               pt.x = 10 + this.percentDone * 598; 
+            pt.y = 10 + Math.pow(2,this.percentDone * 8.8); 
+            pt.x = 10 + this.percentDone * 598; 
 
-           } 
+        } 
 
-       }); 
+    }); 
 
-       // inject a canvas into the given id. 
-       scene.injectCanvas('apparea'); 
+    // inject a canvas into the given id. 
+    scene.injectCanvas('apparea'); 
 
-       // play the scene 
-       scene.play(); 
+    // play the scene 
+    scene.play(); 
 
 As you can see I am following a design pattern where there is a main setup function returned to the scene global, along with a public API. 
 
@@ -49,7 +49,7 @@ The following is my documentation of the options object that is passed to the sc
 
 The maxFrame properties is used to set the number of frames that are to be used in your animation.  
 
-   MaxFrame : 60 
+    MaxFrame : 60 
 
 You can omit this from your options object, a default of 50 will be applied. 
 
@@ -57,19 +57,19 @@ You can omit this from your options object, a default of 50 will be applied.
 
 An animation must always include at lest one or more parts. A part is just a boxed area that has certain values such as x, y, width, height, and radian (rotation). The animations that I make just involve simple 2d translations, rotations, and scaling of 2d boxed areas. These parts can then then be filled with images, but the main function of forFrame is to work out the geometry of the animation.  
 
-   // define some parts 
-   parts : [ 
-       { 
-           id : 'box', 
-           w: 32, 
-           h: 32 
+    // define some parts
+    parts : [ 
+       {
+           id : 'box',
+           w: 32,
+           h: 32
 
-       },  
-       { 
-           id : 'sectionBox' 
-       } 
+       },
+       {
+           id : 'sectionBox'
+       }
 
-   ] 
+    ]
 
 When defining a part you must at least give an id. If desired you can also set some static values as well, but you can also do so when writing your forFrame method(s). See the Part class section to learn more about parts. 
 
@@ -85,7 +85,7 @@ An animation will sometimes work out fine with a single for frame method, and wi
 
 Here is a quick demo to get started with sections. 
 
-   scene({ 
+    scene({ 
 
        maxFrame : 200, 
 
@@ -156,13 +156,13 @@ Here is a quick demo to get started with sections.
 
        } 
 
-   }); 
+    }); 
 
-   // inject a canvas into an element with an id of 'apparea'. 
-   scene.injectCanvas('apparea'); 
+    // inject a canvas into an element with an id of 'apparea'. 
+    scene.injectCanvas('apparea'); 
 
-   // play the scene 
-   scene.play(); 
+    // play the scene 
+    scene.play(); 
 
 
 ## scene API 
@@ -191,14 +191,14 @@ Render a single given frame. You must inject a canvas first in order to use this
 
 In some cases you might want to set the animation you are working out to a certain frame, rather then playing it back at the typical forward frame rate. That can be done by just calling scene.setFrame, however in order to see anything you will want to also use scene.injectCanvas, and scene.renderFrame 
 
-   // inject a canvas into the given id. 
-   scene.injectCanvas('apparea'); 
+    // inject a canvas into the given id. 
+    scene.injectCanvas('apparea'); 
 
-   // set to frame 12 
-   scene.setFrame(12); 
+    // set to frame 12 
+    scene.setFrame(12); 
 
-   // I would like to see what that looks like 
-   scene.renderFrame(); 
+    // I would like to see what that looks like 
+    scene.renderFrame(); 
 
 ### scene.step
 
@@ -228,7 +228,7 @@ Use this to load images to be used in skinning of parts.
 
 Use the play method to playback your animation after setting up a proper options object for the scene, and injecting a canvas. You can give an options object to play that can include an appendRender method, and a z level value for it. This is useful for doing some additional on the fly rendering to the canvas. You can also set a frameRate here in the play method, the default is 30 fps. 
 
-   scene.play({ 
+    scene.play({ 
 
        appendRender : function (ctx) { 
 
@@ -242,7 +242,7 @@ Use the play method to playback your animation after setting up a proper options
 
        frameRate : 40 
 
-   }); 
+    }); 
 
 ## The state object 
 
@@ -260,7 +260,7 @@ The total number of frames in the anamation.
 
 The percentDone property returns a value between 0, and 1 that reflects the current percentage to completion of the animation. It is simply just state.frame / state.maxFrame. 
 
-   var pt = this.parts[box]; 
+    var pt = this.parts[box]; 
     pt.x = this.percentDone * 400; 
 
 The above expression in a forFrame method will move a part called box right from 0 to 400 on the x axis. 
