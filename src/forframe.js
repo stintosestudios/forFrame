@@ -194,7 +194,7 @@ var scene = (function () {
             // append render?
             if (appendRender && z === appendZ) {
 
-                appendRender(ctx);
+                appendRender.call(state, ctx);
 
             }
 

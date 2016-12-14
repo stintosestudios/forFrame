@@ -179,11 +179,12 @@ scene.load(
     scene.setFrame(1);
 
     scene.renderFrame(function(ctx){
-		
-		ctx.fillStyle = '#000000';
-		ctx.fillRect(0,0,20,20);
-		
-	});
+
+        // render current frame index, and maxFrame
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText('frame: ' + this.frame + '\/' + this.maxFrame, 20, 20);
+
+    });
 
     //scene.play();
 
