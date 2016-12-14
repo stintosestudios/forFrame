@@ -182,7 +182,7 @@ var scene = (function () {
         z = 0,
         ctx = state.ctx;
 
-        appendZ = appendZ === undefined ? Object.keys(state.parts).length-1: appendZ;
+        appendZ = appendZ === undefined ? Object.keys(state.parts).length - 1 : appendZ;
 
         // clear canvas.
         state.ctx.fillStyle = 'black';
@@ -302,14 +302,25 @@ var scene = (function () {
     };
 
     // play the scene
-    api.play = function () {
+    api.play = function (options) {
 
         // ALERT! setTimeout? what?
-        setTimeout(api.play, 33);
 
-        api.renderFrame();
+        options = options === undefined ? {} : options;
 
-        api.step();
+        options.frameRate = options.frameRate === undefined ? 33 : options.frameRate;
+
+        var loop = function () {
+
+            setTimeout(loop, options.frameRate);
+
+            api.renderFrame(options.appendRender, options.appendZ);
+
+            api.step();
+
+        };
+
+        loop();
 
     };
 

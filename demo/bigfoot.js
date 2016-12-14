@@ -148,12 +148,12 @@ scene({
         log,
         x;
 
-        log = Math.log(1 + (1-(this.percentDone / 0.5))) / Math.log(2);
+        log = Math.log(1 + (1 - (this.percentDone / 0.5))) / Math.log(2);
         x = dH * log;
 
         if (this.percentDone >= 0.5) {
 
-            log = Math.log(2 - (1-((this.percentDone - 0.5) / 0.5)) * 1) / Math.log(2);
+            log = Math.log(2 - (1 - ((this.percentDone - 0.5) / 0.5)) * 1) / Math.log(2);
             x = dH + (dH - (log * dH));
 
         }
@@ -177,15 +177,30 @@ scene.load(
 
     // jump to a given frame
     scene.setFrame(1);
-
+    /*
     scene.renderFrame(function(ctx){
 
-        // render current frame index, and maxFrame
-        ctx.fillStyle = '#ffffff';
-        ctx.fillText('frame: ' + this.frame + '\/' + this.maxFrame, 20, 20);
+    // render current frame index, and maxFrame
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText('frame: ' + this.frame + '\/' + this.maxFrame, 20, 20);
 
     });
+     */
 
-    //scene.play();
+    scene.play({
+
+        appendRender : function (ctx) {
+
+            // render current frame index, and maxFrame
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText('frame: ' + this.frame + '\/' + this.maxFrame, 20, 20);
+
+        },
+
+        appendZ : 1,
+
+        frameRate : 70
+
+    });
 
 });
