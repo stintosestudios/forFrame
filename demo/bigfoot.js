@@ -199,7 +199,7 @@ scene.load(
 
         appendZ : 1,
 
-        frameRate : 70
+        frameRate : 25
 
     });
 

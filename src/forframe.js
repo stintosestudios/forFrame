@@ -308,7 +308,7 @@ var scene = (function () {
 
         options = options === undefined ? {} : options;
 
-        options.frameRate = options.frameRate === undefined ? 33 : options.frameRate;
+        options.frameRate = options.frameRate === undefined ? 33 : 1000 / options.frameRate;
 
         var loop = function () {
 
