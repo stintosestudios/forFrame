@@ -1,5 +1,7 @@
 # forframe.js 
 
+![logo](https://raw.githubusercontent.com/stintosestudios/forFrame/master/demo/img/logo_320.gif)
+
 A simple tool for making animations that will end up being furnished to *.gif, a sprite sheet *.png, ect. 
 
 

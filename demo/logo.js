@@ -88,7 +88,7 @@ scene.load(
         'demo/img/logo.png'
     ],
     function (progress) {
-/*
+
     // play the scene
     scene.play({
         appendRender : function (ctx) {
@@ -125,13 +125,14 @@ scene.load(
         appendZ : 0,
         frameRate : 24
     });
-	*/
-	// uncomment to save as png
+
+    // uncomment to save as png
+    /*
     if(progress === 1){
 
-        scene.toPNGCollection();
+    scene.toPNGCollection();
 
     }
-
+     */
 
 });
