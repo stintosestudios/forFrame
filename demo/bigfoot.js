@@ -2,7 +2,7 @@
 // start by setting up the scene
 scene({
 
-    maxFrame : 50,
+    maxFrame : 120,
 
     // define some parts
     parts : [{
@@ -187,7 +187,7 @@ scene.load(
     });
      */
 
-/*
+
     scene.play({
 
         appendRender : function (ctx) {
@@ -203,14 +203,15 @@ scene.load(
         frameRate : 25
 
     });
-*/
 
 
-
+// uncomment to save as png
+/*
     if(progress === 1){
 
         scene.toPNGCollection();
 
     }
+*/
 
 });

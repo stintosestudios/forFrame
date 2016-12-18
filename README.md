@@ -47,11 +47,11 @@ The following is my documentation of the options object that is passed to the sc
 
 ### maxFrame 
 
-The maxFrame properties is used to set the number of frames that are to be used in your animation.  
+The maxFrame property is used to set the number of frames that are to be used in your animation.  
 
-    MaxFrame : 60 
+    maxFrame : 60 
 
-You can omit this from your options object, a default of 50 will be applied. 
+You can omit this from your options object, a hard coded default of 50 will be applied. 
 
 ### Parts 
 
@@ -77,13 +77,21 @@ When defining a part you must at least give an id. If desired you can also set s
 
 The forFrame method is where the expressions that define the animation will be written. For each frame the main forFrame method will be called passing the current value of the inner state object that can be accessed via the this keyword. 
 
+    forFrame : function () {
+
+        var pt = this.parts['box'];
+
+        // just a simple move of the box along the y axis from 0 to 200 pixels
+        pt.y = 0 + 200 * this.percentDone;
+        pt.x = 0;
+
+    }
 
 ### Sections 
 
-
 An animation will sometimes work out fine with a single for frame method, and will therefor not require the use of sections. However there will likely be times where you will want to use more than one for frame method at different times within the span of the animation. This is where sections come into play. It is a standard way to defined at what frame percentage a certain method is to be used, and for how long. 
 
-Here is a quick demo to get started with sections. 
+Here is a quick copy and paste demo to get started with sections. 
 
     scene({ 
 
@@ -367,6 +375,8 @@ All parts are just simple box areas, as shuch they have the typical width, heigh
 The rotation of the part in radians.
 
 ### Part.skin 
+
+The Parts Skin Class instance if it has one.
 
 ## The Skin Class 
 
