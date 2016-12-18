@@ -173,10 +173,10 @@ scene.load(
         'demo/img/pathead.png',
         'demo/img/background2.png'
     ],
-    function () {
+    function (progress) {
 
     // jump to a given frame
-    scene.setFrame(1);
+    //scene.setFrame(1);
     /*
     scene.renderFrame(function(ctx){
 
@@ -187,6 +187,7 @@ scene.load(
     });
      */
 
+/*
     scene.play({
 
         appendRender : function (ctx) {
@@ -202,5 +203,14 @@ scene.load(
         frameRate : 25
 
     });
+*/
+
+
+
+    if(progress === 1){
+
+        scene.toPNGCollection();
+
+    }
 
 });

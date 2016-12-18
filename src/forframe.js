@@ -275,7 +275,8 @@ var scene = (function () {
 
     api.load = function (urlList, done) {
 
-        var img;
+        var img,
+        progress = 0;
 
         if (done === undefined) {
             done = function () {};
@@ -289,7 +290,9 @@ var scene = (function () {
 
             img.addEventListener('load', function () {
 
-                done();
+                progress += 1;
+
+                done(progress / state.img.length);
 
             });
 
@@ -306,7 +309,9 @@ var scene = (function () {
 
         // ALERT! setTimeout? what?
 
-        options = options === undefined ? {} : options;
+        options = options === undefined ? {}
+
+         : options;
 
         options.frameRate = options.frameRate === undefined ? 33 : 1000 / options.frameRate;
 
@@ -323,6 +328,31 @@ var scene = (function () {
         loop();
 
     };
+
+    // convert your animation to a *.png file collection
+    api.toPNGCollection = function () {
+
+        // set current frame to zerro if it is not all ready
+        state.frame = 0;
+
+        // test for "saveAs" global as this methods requiers filesaver.js
+        if (saveAs) {
+
+            this.setFrame(state.frame);
+            this.renderFrame();
+
+            state.canvas.toBlob(function (blob) {
+                saveAs(blob, 'frame_'+state.frame+'.png');
+            });
+
+            // no saveAs
+        } else {
+
+            throw new Error('toPngCollection needs filesaver.js. See the README.');
+
+        }
+
+    }
 
     return api;
 
