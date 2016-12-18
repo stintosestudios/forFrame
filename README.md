@@ -253,7 +253,12 @@ It makes use of canvas.blob, and fileSaver.js to get chrome to spit out a PNG fi
 To star chrome with the flag, close all chrome windows, then restart chrome from the command line like so:
 
 In windows 10 PowerShell:
-    > start "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" "--allow-file-access-from-files"
+
+    start "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" "--allow-file-access-from-files"
+
+Linux:
+
+    $ chromium-browser --allow-file-access-from-files
 
 If all goes well you can just call the method in place of scene.play, but make sure that all your images are loaded first.
 
@@ -279,10 +284,6 @@ If all goes well you can just call the method in place of scene.play, but make s
     );
 
 If you use GIMP for image manipulation like I do, use "open as layers" to import your collection of PMG's as layers. Once gimp imports all the frames run a Filters>Animation>Optimize (for Gif). After the optimize is done just export as GIF. When doing so be sure to check "as animation", and set your delay to say 33ms.
-
-Linux:
-
-    $ chromium-browser --allow-file-access-from-files
 
 ## The state object 
 
@@ -351,12 +352,19 @@ state.currentSection returns whatever may be returned in the current section for
 
 A Part class contains values the reflect the current state of a part of an animation, such as position, and size among other things. 
 
-### Part.id 
-### Part.w 
-### Part.h 
-### Part.x 
-### Part.y 
+### Part.id
+
+A part needs to at least have an id. The id should be a vaild javascript property name.
+
+    parts : [{id : 'a-moving-box'}]
+
+### Part.w, Part.h, Part.x, Part.y
+
+All parts are just simple box areas, as shuch they have the typical width, height, x, and y values. You can set static values for the part in your options object, anything that is to be changed by way of expression in the forFrame methods should be done in your forFrame methods.
+
 ### Part.radian 
+
+The rotation of the part in radians.
 
 ### Part.skin 
 
@@ -365,13 +373,20 @@ A Part class contains values the reflect the current state of a part of an anima
 A Skin class instance contains values that have to do with the skinning of a part with an asset image loaded with scene.load. 
 
 ### Skin.imgIndex 
-### Skin.xOffset 
-### Skin.yOffset 
-### Skin.sx 
-### Skin.sy 
-### Skin.sw 
-### Skin.sh 
+
+The index of the image in state.img array that is to be used for the skin of a part.
+
+### Skin.xOffset, Skin.yOffset
+
+sometimes you might want to offset the skin from the parts position, this can be done with Skin.xOffset, and Skin.yOffset.
+
+### Skin.sx, Skin.sy, Skin.sw, Skin.sh
+
+The s stands fro source, use the source values to define section in the image that is to be used for the skin.
+
 ### Skin.renderPartBox 
+
+If true the part area will be shown as a red outline. This is useful for when tweaking a skined animation and you want to know where everything is with your parts.
 
 ## Legal 
 
