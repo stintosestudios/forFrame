@@ -17,7 +17,7 @@ As of this writing there is no way of defining a frame rate in the options objec
 
 If you just want to get started right away by starting a simple box animation you would use forframe.js like this, passing an options object to the scene global, and injecting a canvas into a container HTML element with an id of "apparea". 
 
-'''js
+```js
     // start by setting up the scene 
     scene({ 
 
@@ -41,7 +41,7 @@ If you just want to get started right away by starting a simple box animation yo
 
     // play the scene 
     scene.play(); 
-'''
+```
 
 As you can see I am following a design pattern where there is a main setup function returned to the scene global, along with a public API. 
 
