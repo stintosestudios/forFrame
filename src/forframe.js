@@ -330,12 +330,12 @@ var scene = (function () {
     };
 
     // convert your animation to a *.png file collection
-    api.toPNGCollection = function () {
+    api.toPNGCollection = function (options) {
 
         var saveFrames = function () {
 
             api.setFrame(state.frame);
-            api.renderFrame();
+            api.renderFrame(options.appendRender, options.appendZ);
 
             state.canvas.toBlob(function (blob) {
 
@@ -351,6 +351,10 @@ var scene = (function () {
             });
 
         };
+
+        if (options === undefined) {
+            options = {};
+        }
 
         // test for "saveAs" global as this methods requiers filesaver.js
         if (saveAs) {

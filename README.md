@@ -260,7 +260,7 @@ This method is for exporting all of the frames to a PNG file collection. Combine
 
 It makes use of canvas.blob, and fileSaver.js to get chrome to spit out a PNG file for each frame. The collection on PNG's can then be imported to an applaction that can convert the frames to a video container format. To use it there must be a link to fileSaver.js in the HTML file, and chrome must be started with the "--allow-file-access-from-files" flag if you want to get this to work via the file:// protocol. If you do not use the flag, or host what you are working via http, you will get a tainted canvas error in chrome.
 
-To star chrome with the flag, close all chrome windows, then restart chrome from the command line like so:
+To start chrome with the flag, close all chrome windows, then restart chrome from the command line like so:
 
 In windows 10 PowerShell:
 
