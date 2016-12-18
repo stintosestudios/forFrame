@@ -270,22 +270,68 @@ Linux:
 
     $ chromium-browser --allow-file-access-from-files
 
-If all goes well you can just call the method in place of scene.play, but make sure that all your images are loaded first.
+If all goes well you can just call the method in place of scene.play, but make sure that all your images are loaded first. If you are useing an appendRender method you will want to include that. In fact you can used the same object that is used for scene.play, the frameRate property is just ignored.
 
     scene.injectCanvas('apparea');
 
     scene.load(
         [
-        'demo/img/foot.png',
-        'demo/img/pathead.png',
-        'demo/img/background2.png'
+            'demo/img/foot.png',
+            'demo/img/pathead.png',
+            'demo/img/background2.png'
         ],
 
         function (progress) {
 
-            if(progress === 1){
+            // an options object with an appendRender method that is shared
+            // between 
+            var options = {
 
-                scene.toPNGCollection();
+                appendRender : function (ctx) {
+
+                    var x = 0,
+                    y = 0,
+                    size = 64,
+                    bias = Math.abs((0.5 - this.percentDone) / 0.5);
+                    space = 5 + 15 * bias;
+
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, 640, 480);
+                    ctx.strokeStyle = '#000000';
+                    while (y < 5) {
+
+                        x = 0;
+                        while (x < 5) {
+
+                            ctx.strokeRect(
+                                x * (size + space) + (320 - size * 5 / 2) - space * 5 / 2,
+                                y * (size + space) + (240 - size * 5 / 2) - space * 5 / 2,
+                                size,
+                                size);
+
+                            x += 1;
+
+                        }
+
+                        y += 1;
+
+                    }
+
+                },
+
+                appendZ : 0,
+
+                frameRate : 24
+
+            };
+
+            // the same options object can be used for both play and toPNGCollection
+            if (progress === 1) {
+
+                // play the scene
+                //scene.play(options);
+
+                scene.toPNGCollection(options);
 
             }
 
