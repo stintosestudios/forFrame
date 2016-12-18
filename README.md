@@ -244,6 +244,46 @@ Use the play method to playback your animation after setting up a proper options
 
     }); 
 
+## scene.toPNGCollection
+
+This method is for exporting all of the frames to a PNG file collection. Combined with GIMP (or any other application that calls for this kind of frame input), it is a crude yet effective way of furnishing to GIF.
+
+It makes use of canvas.blob, and fileSaver.js to get chrome to spit out a PNG file for each frame. The collection on PNG's can then be imported to an applaction that can convert the frames to a video container format. To use it there must be a link to fileSaver.js in the HTML file, and chrome must be started with the "--allow-file-access-from-files" flag if you want to get this to work via the file:// protocol. If you do not use the flag, or host what you are working via http, you will get a tainted canvas error in chrome.
+
+To star chrome with the flag, close all chrome windows, then restart chrome from the command line like so:
+
+In windows 10 PowerShell:
+    > start "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" "--allow-file-access-from-files"
+
+If all goes well you can just call the method in place of scene.play, but make sure that all your images are loaded first.
+
+    scene.injectCanvas('apparea');
+
+    scene.load(
+        [
+        'demo/img/foot.png',
+        'demo/img/pathead.png',
+        'demo/img/background2.png'
+        ],
+
+        function (progress) {
+
+            if(progress === 1){
+
+                scene.toPNGCollection();
+
+            }
+
+        }
+
+    );
+
+If you use GIMP for image manipulation like I do, use "open as layers" to import your collection of PMG's as layers. Once gimp imports all the frames run a Filters>Animation>Optimize (for Gif). After the optimize is done just export as GIF. When doing so be sure to check "as animation", and set your delay to say 33ms.
+
+Linux:
+
+    $ chromium-browser --allow-file-access-from-files
+
 ## The state object 
 
 The state object contains properties and methods that are useful for the formation of expressions that define an animation. The forFrame methods are invoked with the call method passing the current value of the state object that can be accessed via the this keyword. You will likely want to work with at least one property such as the percentDone property, when defining the behavior of an animation. 

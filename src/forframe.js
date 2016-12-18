@@ -332,18 +332,34 @@ var scene = (function () {
     // convert your animation to a *.png file collection
     api.toPNGCollection = function () {
 
-        // set current frame to zerro if it is not all ready
-        state.frame = 0;
+        var saveFrames = function () {
+
+            api.setFrame(state.frame);
+            api.renderFrame();
+
+            state.canvas.toBlob(function (blob) {
+
+                saveAs(blob, 'frame_' + state.frame + '.png');
+
+                state.frame += 1;
+                if (state.frame < state.maxFrame) {
+
+                    saveFrames();
+
+                }
+
+            });
+
+        };
 
         // test for "saveAs" global as this methods requiers filesaver.js
         if (saveAs) {
 
-            this.setFrame(state.frame);
-            this.renderFrame();
+            // set current frame to zerro if it is not all ready
+            state.frame = 0;
 
-            state.canvas.toBlob(function (blob) {
-                saveAs(blob, 'frame_'+state.frame+'.png');
-            });
+            // start saveFrames recursive loop
+            saveFrames();
 
             // no saveAs
         } else {

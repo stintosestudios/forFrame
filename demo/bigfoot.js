@@ -2,7 +2,7 @@
 // start by setting up the scene
 scene({
 
-    maxFrame : 200,
+    maxFrame : 50,
 
     // define some parts
     parts : [{
