@@ -53,7 +53,9 @@ The following is my documentation of the options object that is passed to the sc
 
 The maxFrame property is used to set the number of frames that are to be used in your animation.  
 
+```js
     maxFrame : 60 
+```
 
 You can omit this from your options object, a hard coded default of 50 will be applied. 
 
@@ -61,6 +63,7 @@ You can omit this from your options object, a hard coded default of 50 will be a
 
 An animation must always include at lest one or more parts. A part is just a boxed area that has certain values such as x, y, width, height, and radian (rotation). The animations that I make just involve simple 2d translations, rotations, and scaling of 2d boxed areas. These parts can then then be filled with images, but the main function of forFrame is to work out the geometry of the animation.  
 
+```js
     // define some parts
     parts : [ 
        {
@@ -74,6 +77,7 @@ An animation must always include at lest one or more parts. A part is just a box
        }
 
     ]
+```
 
 When defining a part you must at least give an id. If desired you can also set some static values as well, but you can also do so when writing your forFrame method(s). See the Part class section to learn more about parts. 
 
@@ -81,6 +85,7 @@ When defining a part you must at least give an id. If desired you can also set s
 
 The forFrame method is where the expressions that define the animation will be written. For each frame the main forFrame method will be called passing the current value of the inner state object that can be accessed via the this keyword. 
 
+```js
     forFrame : function () {
 
         var pt = this.parts['box'];
@@ -90,6 +95,7 @@ The forFrame method is where the expressions that define the animation will be w
         pt.x = 0;
 
     }
+```
 
 ### Sections 
 
@@ -97,6 +103,7 @@ An animation will sometimes work out fine with a single for frame method, and wi
 
 Here is a quick copy and paste demo to get started with sections. 
 
+```js
     scene({ 
 
        maxFrame : 200, 
@@ -175,7 +182,7 @@ Here is a quick copy and paste demo to get started with sections.
 
     // play the scene 
     scene.play(); 
-
+```
 
 ## scene API 
 
@@ -185,12 +192,15 @@ The scene API is a collection of methods that are appended to the scene global f
 
 Use this method to create and inject a canvas element that will be used to render the animation. You must give it an id of a container element in your HTML
 
+```js
     scene.injectCanvas('my-container-element');
+```
 
 ### scene.renderFrame
 
 Render a single given frame. You must inject a canvas first in order to use this, you can also give an appendRender and z index value that is useful for displaying additional information. Just like forFrame methods you can access the state via the tis keyword.
 
+```js
     scene.renderFrame(function(ctx){
 
         // render current frame index, and maxFrame
@@ -198,11 +208,13 @@ Render a single given frame. You must inject a canvas first in order to use this
         ctx.fillText('frame: ' + this.frame + '\/' + this.maxFrame, 20, 20);
 
     },1); // appendZ value of 1
+```
 
 ### scene.setFrame - Set the animation to a given frame. 
 
 In some cases you might want to set the animation you are working out to a certain frame, rather then playing it back at the typical forward frame rate. That can be done by just calling scene.setFrame, however in order to see anything you will want to also use scene.injectCanvas, and scene.renderFrame 
 
+```js
     // inject a canvas into the given id. 
     scene.injectCanvas('apparea'); 
 
@@ -211,6 +223,7 @@ In some cases you might want to set the animation you are working out to a certa
 
     // I would like to see what that looks like 
     scene.renderFrame(); 
+```
 
 ### scene.step
 
@@ -220,6 +233,7 @@ Step the animation by a single frame
 
 Use this to load images to be used in skinning of parts.
 
+```js
     scene.load(
         [
             'demo/img/foot.png',
@@ -235,11 +249,13 @@ Use this to load images to be used in skinning of parts.
         }
 
     );
+```
 
 ### scene.play 
 
 Use the play method to playback your animation after setting up a proper options object for the scene, and injecting a canvas. You can give an options object to play that can include an appendRender method, and a z level value for it. This is useful for doing some additional on the fly rendering to the canvas. You can also set a frameRate here in the play method, the default is 30 fps. 
 
+```js
     scene.play({ 
 
        appendRender : function (ctx) { 
@@ -255,6 +271,7 @@ Use the play method to playback your animation after setting up a proper options
        frameRate : 40 
 
     }); 
+```
 
 ## scene.toPNGCollection
 
@@ -274,6 +291,7 @@ Linux:
 
 If all goes well you can just call the method in place of scene.play, but make sure that all your images are loaded first. If you are useing an appendRender method you will want to include that. In fact you can used the same object that is used for scene.play, the frameRate property is just ignored.
 
+```js
     scene.injectCanvas('apparea');
 
     scene.load(
@@ -340,6 +358,7 @@ If all goes well you can just call the method in place of scene.play, but make s
         }
 
     );
+```
 
 If you use GIMP for image manipulation like I do, use "open as layers" to import your collection of PMG's as layers. Once gimp imports all the frames run a Filters>Animation>Optimize (for Gif). After the optimize is done just export as GIF. When doing so be sure to check "as animation", and set your delay to say 33ms.
 
@@ -359,8 +378,10 @@ The total number of frames in the anamation.
 
 The percentDone property returns a value between 0, and 1 that reflects the current percentage to completion of the animation. It is simply just state.frame / state.maxFrame. 
 
+```js
     var pt = this.parts[box]; 
     pt.x = this.percentDone * 400; 
+```
 
 The above expression in a forFrame method will move a part called box right from 0 to 400 on the x axis. 
 
@@ -392,6 +413,7 @@ This holds references the canvas DOM element, and the 2d drawing context.
 
 This is the method that is to be called in the main forFrame method if sections are being used. 
 
+```js
     forFrame : function () { 
 
        var rad = this.currentSection(), 
@@ -403,6 +425,7 @@ This is the method that is to be called in the main forFrame method if sections 
 
 
     }
+```
 
 state.currentSection returns whatever may be returned in the current section forFrame method. In the above example a radian value is being returned, the value of which may change based on different expressions from one section to another. 
 
@@ -414,7 +437,9 @@ A Part class contains values the reflect the current state of a part of an anima
 
 A part needs to at least have an id. The id should be a vaild javascript property name.
 
+```js
     parts : [{id : 'a-moving-box'}]
+```
 
 ### Part.w, Part.h, Part.x, Part.y
 
