@@ -198,17 +198,31 @@ Use this method to create and inject a canvas element that will be used to rende
 
 ### scene.renderFrame
 
-Render a single given frame. You must inject a canvas first in order to use this, you can also give an appendRender and z index value that is useful for displaying additional information. Just like forFrame methods you can access the state via the this keyword.
+Render a single given frame. You must inject a canvas first in order to use this, you can also give an appendRender and z index value via a playback object that is useful for displaying additional information. Just like forFrame methods you can access the state via the this keyword.
 
 ```js
-    scene.renderFrame(function(ctx){
 
-        // render current frame index, and maxFrame
-        ctx.fillStyle = '#ffffff';
-        ctx.fillText('frame: ' + this.frame + '\/' + this.maxFrame, 20, 20);
+    var playback = {
 
-    },1); // appendZ value of 1
+        appendRender : function (ctx) {
+
+            // render current frame index, and maxFrame
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText('frame: ' + this.frame + '\/' + this.maxFrame, 20, 20);
+
+        },
+
+        appendZ : 1
+
+    };
+
+    // just show frame index 3
+    scene.setFrame(3);
+    scene.renderFrame(playback);
+
 ```
+
+It is helpful to call scene.renderFrame dirrectly with scene.setFrame if you want to view a certain frame index.
 
 ### scene.setFrame - Set the animation to a given frame. 
 
@@ -253,7 +267,7 @@ Use this to load images to be used in skinning of parts.
 
 ### scene.play 
 
-Use the play method to playback your animation after setting up a proper options object for the scene, and injecting a canvas. You can give an options object to play that can include an appendRender method, and a z level value for it. This is useful for doing some additional on the fly rendering to the canvas. You can also set a frameRate here in the play method, the default is 30 fps. 
+Use the play method to playback your animation after setting up a proper options object for the scene, and injecting a canvas. You can give an playback object to play that can include an appendRender method, and a z level value for it. This is useful for doing some additional on the fly rendering to the canvas. You can also set a frameRate here in the play method, the default is 30 fps. 
 
 ```js
     scene.play({ 
@@ -305,7 +319,7 @@ If all goes well you can just call the method in place of scene.play, but make s
 
             // an options object with an appendRender method that is shared
             // between 
-            var options = {
+            var playback = {
 
                 appendRender : function (ctx) {
 
@@ -349,9 +363,10 @@ If all goes well you can just call the method in place of scene.play, but make s
             if (progress === 1) {
 
                 // play the scene
-                //scene.play(options);
+                // scene.play(playback);
 
-                scene.toPNGCollection(options);
+                // make a PNG collection
+                scene.toPNGCollection(playback);
 
             }
 
@@ -431,7 +446,45 @@ state.currentSection returns whatever may be returned in the current section for
 
 ## The Parts Class. 
 
-A Part class contains values the reflect the current state of a part of an animation, such as position, and size among other things. 
+A Part class contains values the reflect the current state of a part of an animation, such as position, and size. 
+
+The following should show the full range of options for static values that can be set in the parts array. These values can also be dynamically manipulated in the for frame methods.
+
+```js
+    parts : [
+        {
+            id : 'staticBox',
+            w : 200,
+            h : 100,
+            x : 220,
+            y : 190,
+            radian : .5
+
+        }, {
+
+            id : 'logo',
+            w : 128,
+            h : 32,
+            x : 50,
+            y : 100,
+
+            skin : {
+
+                imgIndex : 0,
+                sx : 20,
+                sy : 10,
+                sw : 20,
+                sh : 5,
+                renderPartBox : true,
+                xOffset : -20,
+                yOffset : -10
+
+            }
+
+        }
+
+    ]
+```
 
 ### Part.id
 

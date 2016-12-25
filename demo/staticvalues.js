@@ -72,9 +72,9 @@ scene.load(
         };
 
         
-		// just show frame index 3
-        scene.setFrame(3);
-        scene.renderFrame(playback);
+        // just show frame index 3
+        //scene.setFrame(3);
+        //scene.renderFrame(playback);
         
 
         // scene
