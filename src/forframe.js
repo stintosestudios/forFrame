@@ -201,6 +201,32 @@ var scene = (function () {
 
     };
 
+    // inject a User Interface into the element of the given id
+    api.injectUI = function (playbackObj) {
+
+        var ui = document.createElement('div'),
+        control;
+
+        ui.style.outline = '1px solid #000000';
+        ui.style.width = '640px';
+        ui.style.height = '120px';
+
+        control = document.createElement('input');
+        control.type = 'button';
+        control.value = 'play\/stop';
+
+        control.addEventListener('click', function (e) {
+
+            api.play(playbackObj);
+
+        });
+
+        ui.appendChild(control);
+
+        document.getElementById(playbackObj.containerId).appendChild(ui);
+
+    };
+
     // render the current frame
     api.renderFrame = function (playbackObj) {
 
@@ -407,7 +433,7 @@ var scene = (function () {
 
         }
 
-    }
+    };
 
     return api;
 
