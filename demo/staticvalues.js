@@ -38,7 +38,13 @@ scene({
 
     ],
 
-    forFrame : function () {}
+    forFrame : function () {
+
+        var part = this.parts['logo'];
+
+        part.radian = Math.PI * 2 * this.percentDone;
+
+    }
 
 });
 
@@ -54,11 +60,23 @@ scene.load(
     // uncomment to save as png
     if (progress === 1) {
 
+        var options = {
+            appendRender : function (ctx) {
+
+                ctx.fillStyle = '#555555';
+                ctx.fillRect(0, 0, 640, 480);
+
+            },
+            appendZ : 0
+        };
+
+        /*
         scene.setFrame(0);
-        scene.renderFrame();
+        scene.renderFrame(options);
+         */
 
         // play the scene
-        //scene.play();
+        scene.play(options);
 
         //scene.toPNGCollection(options);
 

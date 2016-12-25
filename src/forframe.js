@@ -76,8 +76,6 @@ var scene = (function () {
 
             }
 
-            console.log(current[0] + ':' + this[current[0]]);
-
             i += 1;
 
         }
@@ -204,15 +202,20 @@ var scene = (function () {
     };
 
     // render the current frame
-    api.renderFrame = function (appendRender, appendZ) {
+    api.renderFrame = function (options) {
 
         var prop,
         skin,
         pt,
         z = 0,
-        ctx = state.ctx;
+        ctx = state.ctx,
+        appendZ;
 
-        appendZ = appendZ === undefined ? Object.keys(state.parts).length - 1 : appendZ;
+        if (options === undefined) {
+            options = {};
+        }
+
+        appendZ = options.appendZ === undefined ? Object.keys(state.parts).length - 1 : options.appendZ;
 
         // clear canvas.
         state.ctx.fillStyle = 'black';
@@ -222,9 +225,9 @@ var scene = (function () {
         for (prop in state.parts) {
 
             // append render?
-            if (appendRender && z === appendZ) {
+            if (options.appendRender && z === appendZ) {
 
-                appendRender.call(state, ctx);
+                options.appendRender.call(state, ctx);
 
             }
 
@@ -240,15 +243,6 @@ var scene = (function () {
             skin = pt.skin;
 
             if (Number(skin.imgIndex) > -1) {
-
-                console.log('yes we are getting this far');
-                console.log(skin.imgIndex)
-                console.log('sx:' + skin.sx);
-                console.log('sy:' + skin.sy);
-                console.log('sw:' + skin.sw);
-                console.log('sh:' + skin.sh);
-                console.log('xOffset:' + skin.xOffset);
-                console.log('yOffset:' + skin.yOffset);
 
                 // if we have a skin for the part use the skin
                 ctx.strokeStyle = '#ff0000';
@@ -358,7 +352,7 @@ var scene = (function () {
 
             setTimeout(loop, options.frameRate);
 
-            api.renderFrame(options.appendRender, options.appendZ);
+            api.renderFrame(options);
 
             api.step();
 
