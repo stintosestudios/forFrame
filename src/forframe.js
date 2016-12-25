@@ -274,6 +274,7 @@ var scene = (function () {
         // disp div
         control = document.createElement('div');
         control.id = "for_frame_ui_disp";
+        control.style.margin = '10px';
         ui.appendChild(control);
 
         api.setFrame(0);

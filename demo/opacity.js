@@ -110,6 +110,9 @@ scene.load(
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, 640, 480);
             ctx.strokeStyle = '#000000';
+            ctx.save();
+            ctx.globalAlpha = 1-bias;
+
             while (y < 5) {
 
                 x = 0;
@@ -128,6 +131,7 @@ scene.load(
                 y += 1;
 
             }
+            ctx.restore();
 
         },
         containerId : 'apparea',
