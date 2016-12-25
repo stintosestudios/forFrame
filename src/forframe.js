@@ -202,7 +202,7 @@ var scene = (function () {
     };
 
     // render the current frame
-    api.renderFrame = function (options) {
+    api.renderFrame = function (playbackObj) {
 
         var prop,
         skin,
@@ -211,11 +211,11 @@ var scene = (function () {
         ctx = state.ctx,
         appendZ;
 
-        if (options === undefined) {
-            options = {};
+        if (playbackObj === undefined) {
+            playbackObj = {};
         }
 
-        appendZ = options.appendZ === undefined ? Object.keys(state.parts).length - 1 : options.appendZ;
+        appendZ = playbackObj.appendZ === undefined ? Object.keys(state.parts).length - 1 : playbackObj.appendZ;
 
         // clear canvas.
         state.ctx.fillStyle = 'black';
@@ -225,9 +225,9 @@ var scene = (function () {
         for (prop in state.parts) {
 
             // append render?
-            if (options.appendRender && z === appendZ) {
+            if (playbackObj.appendRender && z === appendZ) {
 
-                options.appendRender.call(state, ctx);
+                playbackObj.appendRender.call(state, ctx);
 
             }
 
@@ -338,21 +338,21 @@ var scene = (function () {
     };
 
     // play the scene
-    api.play = function (options) {
+    api.play = function (playbackObj) {
 
         // ALERT! setTimeout? what?
 
-        options = options === undefined ? {}
+        playbackObj = playbackObj === undefined ? {}
 
-         : options;
+         : playbackObj;
 
-        options.frameRate = options.frameRate === undefined ? 33 : 1000 / options.frameRate;
+        playbackObj.frameRate = playbackObj.frameRate === undefined ? 33 : 1000 / playbackObj.frameRate;
 
         var loop = function () {
 
-            setTimeout(loop, options.frameRate);
+            setTimeout(loop, playbackObj.frameRate);
 
-            api.renderFrame(options);
+            api.renderFrame(playbackObj);
 
             api.step();
 
@@ -363,12 +363,12 @@ var scene = (function () {
     };
 
     // convert your animation to a *.png file collection
-    api.toPNGCollection = function (options) {
+    api.toPNGCollection = function (playbackObj) {
 
         var saveFrames = function () {
 
             api.setFrame(state.frame);
-            api.renderFrame(options.appendRender, options.appendZ);
+            api.renderFrame(playbackObj);
 
             state.canvas.toBlob(function (blob) {
 
@@ -385,9 +385,9 @@ var scene = (function () {
 
         };
 
-        if (options === undefined) {
+        if (playbackObj === undefined) {
 
-            options = {};
+            playbackObj = {};
 
         }
 

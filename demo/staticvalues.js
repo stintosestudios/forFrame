@@ -5,7 +5,8 @@ scene({
     maxFrame : 10,
 
     // define some parts
-    parts : [{
+    parts : [
+        {
             id : 'staticBox',
             w : 200,
             h : 100,
@@ -60,7 +61,7 @@ scene.load(
     // uncomment to save as png
     if (progress === 1) {
 
-        var options = {
+        var playback = {
             appendRender : function (ctx) {
 
                 ctx.fillStyle = '#555555';
@@ -70,15 +71,17 @@ scene.load(
             appendZ : 0
         };
 
-        /*
-        scene.setFrame(0);
-        scene.renderFrame(options);
-         */
+        
+		// just show frame index 3
+        scene.setFrame(3);
+        scene.renderFrame(playback);
+        
 
-        // play the scene
-        scene.play(options);
+        // scene
+        //scene.play(playback);
 
-        //scene.toPNGCollection(options);
+        // create a PNG file collection takes it too
+        //scene.toPNGCollection(playback);
 
     }
 
