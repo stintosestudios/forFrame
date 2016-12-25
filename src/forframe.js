@@ -52,24 +52,37 @@ var scene = (function () {
     // The Skin Class is used to skin a Part with an image
     var Skin = function (part, skinOptions) {
 
-        // an imgIndex of -1 means unskined.
-        this.imgIndex = -1;
-        this.xOffset = 0;
-        this.yOffset = 0;
-        this.sx = 0;
-        this.sy = 0;
-        this.sw = 32;
-        this.sh = 32;
+        var defaults = 'imgIndex:-1;xOffset:0;yOffset:0;sx:0;sy:0;sw:32;sh:32;renderPartBox:0;'.split(';'),
+        i = 0,
+        len = defaults.length,
+        current;
 
-        this.renderPartBox = false;
+        if (skinOptions === undefined) {
+            skinOptions = {};
+        }
+        while (i < len - 1) {
 
-        if (skinOptions) {
+            current = defaults[i].split(':');
 
-            this.imgIndex = skinOptions.imgIndex === undefined ? -1 : skinOptions.imgIndex;
-            this.sw = skinOptions.sw === undefined ? part.w : skinOptions.sw;
-            this.sh = skinOptions.sh === undefined ? part.h : skinOptions.sh;
+            if (current[0]in skinOptions) {
+
+                this[current[0]] = skinOptions[current[0]];
+
+            } else {
+
+                // else the default value
+
+                this[current[0]] = current[1];
+
+            }
+
+            console.log(current[0] + ':' + this[current[0]]);
+
+            i += 1;
 
         }
+
+        this.renderPartBox = this.renderPartBox === '0' ? false : true;
 
     };
 
@@ -100,14 +113,6 @@ var scene = (function () {
 
         }
 
-        /*
-        this.id = values.id;
-        this.w = values.w;
-        this.h = values.h;
-        this.x = values.x;
-        this.y = values.y;
-        this.radian = values.radian;
-         */
         // default that Parts skin to a blank Skin class instance
         this.skin = new Skin(this, values.skin);
 
@@ -234,7 +239,16 @@ var scene = (function () {
 
             skin = pt.skin;
 
-            if (skin.imgIndex !== -1) {
+            if (Number(skin.imgIndex) > -1) {
+
+                console.log('yes we are getting this far');
+                console.log(skin.imgIndex)
+                console.log('sx:' + skin.sx);
+                console.log('sy:' + skin.sy);
+                console.log('sw:' + skin.sw);
+                console.log('sh:' + skin.sh);
+                console.log('xOffset:' + skin.xOffset);
+                console.log('yOffset:' + skin.yOffset);
 
                 // if we have a skin for the part use the skin
                 ctx.strokeStyle = '#ff0000';
@@ -244,8 +258,8 @@ var scene = (function () {
                     skin.sy,
                     skin.sw,
                     skin.sh,
-                    -pt.w / 2 + skin.xOffset,
-                    -pt.h / 2 + skin.yOffset,
+                    -pt.w / 2 + Number(skin.xOffset),
+                    -pt.h / 2 + Number(skin.yOffset),
                     pt.w,
                     pt.h);
 

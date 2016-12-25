@@ -18,12 +18,19 @@ scene({
             id : 'logo',
             w : 128,
             h : 32,
-            x : 0,
-            y : 0,
+            x : 50,
+            y : 100,
 
             skin : {
 
-                imgIndex : 0
+                imgIndex : 0,
+                sx : 20,
+                sy : 10,
+                sw : 20,
+                sh : 5,
+                renderPartBox : true,
+                xOffset : -20,
+                yOffset : -10
 
             }
 
