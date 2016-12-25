@@ -17,6 +17,7 @@ var scene = (function () {
         forFrame : null,
         img : [],
         parts : {},
+        opacity : .5,
         canvas : null,
         ctx : null,
         logo : null,
@@ -321,6 +322,10 @@ var scene = (function () {
 
             ctx.strokeStyle = '#ffffff';
             ctx.save();
+
+            // default to state.opacity
+            ctx.globalAlpha = state.opacity;
+
             ctx.translate(pt.x + pt.w / 2, pt.y + pt.h / 2);
             ctx.rotate(pt.radian);
 

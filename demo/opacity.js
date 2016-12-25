@@ -4,6 +4,22 @@ scene({
 
     maxFrame : 50,
 
+    opacity : 0.5,
+
+    logo : {
+        w : 128,
+        h : 56,
+        x : 512,
+        y : 424,
+        skin : {
+            imgIndex : 1,
+            sx : 0,
+            sy : 0,
+            sw : 128,
+            sh : 56
+        }
+    },
+
     // define some parts
     parts : [{
             id : 'forFrame1',
@@ -93,7 +109,8 @@ scene.injectCanvas('apparea');
 
 scene.load(
     [
-        'demo/img/logo.png'
+        'demo/img/logo.png',
+        'demo/img/mylogo_128.png'
     ],
     function (progress) {
 
@@ -111,8 +128,7 @@ scene.load(
             ctx.fillRect(0, 0, 640, 480);
             ctx.strokeStyle = '#000000';
             ctx.save();
-            ctx.globalAlpha = 1-bias;
-
+            ctx.globalAlpha = 1 - bias;
             while (y < 5) {
 
                 x = 0;
@@ -139,6 +155,9 @@ scene.load(
         frameRate : 24
     };
 
-    scene.injectUI(playback);
+    if (progress === 1) {
+        scene.injectUI(playback);
+
+    }
 
 });
