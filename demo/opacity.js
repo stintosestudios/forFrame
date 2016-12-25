@@ -129,6 +129,9 @@ scene.load(
             ctx.strokeStyle = '#000000';
             ctx.save();
             ctx.globalAlpha = 1 - bias;
+			
+			this.opacity = bias;
+			
             while (y < 5) {
 
                 x = 0;
