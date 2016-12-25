@@ -263,6 +263,11 @@ var scene = (function () {
         });
         ui.appendChild(control);
 
+        // disp div
+        control = document.createElement('div');
+        control.id = "for_frame_ui_disp";
+        ui.appendChild(control);
+
         api.setFrame(0);
         api.renderFrame(playbackObj);
 
@@ -278,7 +283,8 @@ var scene = (function () {
         pt,
         z = 0,
         ctx = state.ctx,
-        appendZ;
+        appendZ,
+        disp;
 
         if (playbackObj === undefined) {
             playbackObj = {};
@@ -341,6 +347,14 @@ var scene = (function () {
             }
 
             ctx.restore();
+
+        }
+
+        disp = document.getElementById('for_frame_ui_disp');
+
+        if (disp) {
+
+            disp.innerHTML = 'frame: ' + state.frame + '\/' + state.maxFrame;
 
         }
 
