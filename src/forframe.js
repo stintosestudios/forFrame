@@ -89,7 +89,7 @@ var scene = (function () {
     // the Part Class.
     var Part = function (values) {
 
-        var defaults = 'id:none;w:32;h:32;x:0;y:0;radian:0;'.split(';'),
+        var defaults = 'id:none;w:32;h:32;x:0;y:0;radian:0;opacity:none;'.split(';'),
         i = 0,
         len = defaults.length,
         current;
@@ -332,6 +332,13 @@ var scene = (function () {
 
             // default to state.opacity
             ctx.globalAlpha = state.opacity;
+
+            // if part opacity that will override state.opacity
+            if (Number(pt.opacity) >= 0) {
+
+                ctx.globalAlpha = pt.opacity;
+
+            }
 
             ctx.translate(pt.x + pt.w / 2, pt.y + pt.h / 2);
             ctx.rotate(pt.radian);

@@ -58,6 +58,7 @@ scene({
             id : 'maintext',
             w : 128,
             h : 32,
+            opacity : 1,
             skin : {
 
                 imgIndex : 0,
@@ -95,7 +96,7 @@ scene({
         }
 
         pt = this.parts['maintext'];
-        pt.w = 128 + 256 * bias;
+        pt.w = 256 + 256 * bias;
         pt.h = 32 + 128 * bias;
         pt.x = 320 - (pt.w / 2);
         pt.y = 240 - (pt.h / 2);
@@ -129,9 +130,8 @@ scene.load(
             ctx.strokeStyle = '#000000';
             ctx.save();
             ctx.globalAlpha = 1 - bias;
-			
-			this.opacity = bias;
-			
+
+            this.opacity = 1 - bias;
             while (y < 5) {
 
                 x = 0;
