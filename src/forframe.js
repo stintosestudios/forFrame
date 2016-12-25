@@ -364,29 +364,48 @@ var scene = (function () {
     };
 
     // play the scene
-    api.play = function (playbackObj) {
+    api.play = (function () {
 
-        // ALERT! setTimeout? what?
+        var playActive = false;
 
-        playbackObj = playbackObj === undefined ? {}
+        return function (playbackObj) {
 
-         : playbackObj;
+            // ALERT! setTimeout? what?
 
-        playbackObj.frameRate = playbackObj.frameRate === undefined ? 33 : 1000 / playbackObj.frameRate;
+            playbackObj = playbackObj === undefined ? {}
 
-        var loop = function () {
+             : playbackObj;
 
-            setTimeout(loop, playbackObj.frameRate);
+            playbackObj.frameRate = playbackObj.frameRate === undefined ? 33 : 1000 / playbackObj.frameRate;
 
-            api.renderFrame(playbackObj);
+            var loop = function () {
 
-            api.step();
+                if (playActive) {
+
+                    setTimeout(loop, playbackObj.frameRate);
+
+                }
+
+                api.renderFrame(playbackObj);
+
+                api.step();
+
+            };
+
+            if (!playActive) {
+
+                playActive = true;
+                loop();
+
+            } else {
+
+                playActive = false;
+
+            }
 
         };
-
-        loop();
-
-    };
+    }
+        ()),
 
     // convert your animation to a *.png file collection
     api.toPNGCollection = function (playbackObj) {
