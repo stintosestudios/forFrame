@@ -248,6 +248,8 @@ var scene = (function () {
         });
         ui.appendChild(control);
 
+        api.setFrame(0);
+        api.renderFrame(playbackObj);
 
         document.getElementById(playbackObj.containerId).appendChild(ui);
 
