@@ -98,6 +98,7 @@ scene({
         pt = this.parts['maintext'];
         pt.w = 256 + 256 * bias;
         pt.h = 32 + 128 * bias;
+        pt.opacity = bias;
         pt.x = 320 - (pt.w / 2);
         pt.y = 240 - (pt.h / 2);
 
