@@ -184,6 +184,30 @@ Here is a quick copy and paste demo to get started with sections.
     scene.play(); 
 ```
 
+## The Playback Object.
+
+In addition to the main scene method that accepts an options object, there are main additional methods that are attached to the scene global. Many of these methods accept a playback object that contains information about playback of the animation.
+
+```js
+    var playback = {
+
+        appendRender : function (ctx) {
+
+            ctx.fillStyle = '#555555';
+            ctx.fillRect(0, 0, 640, 480);
+
+        },
+
+        appendZ : 0,
+
+        containerId : 'apparea',
+
+        frameRate : 40
+    };
+
+    scene.injectUI(playback);
+```
+
 ## scene API 
 
 The scene API is a collection of methods that are appended to the scene global function. They are used for injecting a canvas into your HTML, jumping to a single given frame and rendering it to the canvas, as well as playing back your animation in whole among other things.
@@ -196,12 +220,46 @@ Use this method to create and inject a canvas element that will be used to rende
     scene.injectCanvas('my-container-element');
 ```
 
+### scene.injectUI
+
+Use scene.injectUI to inject a user interface that can be used to aid in playback, and exporting of the animation. If used it can replace the need to deal with several methods dirrectly. The methods accepts a playback object, and is the only method that uses the containerId property of that object.
+
+scene.injectCanvas('apparea');
+
+```js
+    scene.load(
+        [
+            'demo/img/mylogo_128.png'
+        ],
+        function (progress) {
+
+        // uncomment to save as png
+        if (progress === 1) {
+
+            var playback = {
+                appendRender : function (ctx) {
+
+                    ctx.fillStyle = '#555555';
+                    ctx.fillRect(0, 0, 640, 480);
+
+                },
+                appendZ : 0,
+
+                containerId : 'apparea'
+            };
+
+            scene.injectUI(playback);
+
+        }
+
+    });
+```
+
 ### scene.renderFrame
 
 Render a single given frame. You must inject a canvas first in order to use this, you can also give an appendRender and z index value via a playback object that is useful for displaying additional information. Just like forFrame methods you can access the state via the this keyword.
 
 ```js
-
     var playback = {
 
         appendRender : function (ctx) {

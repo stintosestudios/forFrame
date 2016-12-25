@@ -2,7 +2,7 @@
 
 scene({
 
-    maxFrame : 10,
+    maxFrame : 40,
 
     // define some parts
     parts : [{
@@ -17,20 +17,17 @@ scene({
 
             id : 'logo',
             w : 128,
-            h : 32,
-            x : 50,
-            y : 100,
+            h : 56,
+            x : 640 - 128,
+            y : 480 - 56,
 
             skin : {
 
                 imgIndex : 0,
-                sx : 20,
-                sy : 10,
-                sw : 20,
-                sh : 5,
-                renderPartBox : true,
-                xOffset : -20,
-                yOffset : -10
+                sx : 0,
+                sy : 0,
+                sw : 128,
+                sh : 56
 
             }
 
@@ -40,7 +37,7 @@ scene({
 
     forFrame : function () {
 
-        var part = this.parts['logo'];
+        var part = this.parts['staticBox'];
 
         part.radian = Math.PI * 2 * this.percentDone;
 
@@ -53,7 +50,7 @@ scene.injectCanvas('apparea');
 
 scene.load(
     [
-        'demo/img/logo.png'
+        'demo/img/mylogo_128.png'
     ],
     function (progress) {
 
@@ -69,21 +66,12 @@ scene.load(
             },
             appendZ : 0,
 
-            containerId : 'apparea'
+            containerId : 'apparea',
+
+            frameRate : 40
         };
 
         scene.injectUI(playback);
-
-        // just show frame index 3
-        //scene.setFrame(3);
-        //scene.renderFrame(playback);
-
-
-        // scene
-        //scene.play(playback);
-
-        // create a PNG file collection takes it too
-        //scene.toPNGCollection(playback);
 
     }
 
