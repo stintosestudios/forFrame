@@ -211,17 +211,43 @@ var scene = (function () {
         ui.style.width = '640px';
         ui.style.height = '120px';
 
+        // play/stop button
         control = document.createElement('input');
         control.type = 'button';
         control.value = 'play\/stop';
-
         control.addEventListener('click', function (e) {
 
             api.play(playbackObj);
 
         });
-
         ui.appendChild(control);
+
+        // step+ button
+        control = document.createElement('input');
+        control.type = 'button';
+        control.value = 'step+';
+        control.addEventListener('click', function (e) {
+
+            // step the current frame forward
+            api.step();
+            api.renderFrame(playbackObj);
+
+        });
+        ui.appendChild(control);
+
+        // step- button
+        control = document.createElement('input');
+        control.type = 'button';
+        control.value = 'step-';
+        control.addEventListener('click', function (e) {
+
+            // step the current frame forward
+            api.step(true);
+            api.renderFrame(playbackObj);
+
+        });
+        ui.appendChild(control);
+
 
         document.getElementById(playbackObj.containerId).appendChild(ui);
 
