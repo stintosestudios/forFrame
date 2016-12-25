@@ -215,6 +215,7 @@ var scene = (function () {
         control = document.createElement('input');
         control.type = 'button';
         control.value = 'play\/stop';
+        control.style.margin = '10px';
         control.addEventListener('click', function (e) {
 
             api.play(playbackObj);
@@ -226,6 +227,7 @@ var scene = (function () {
         control = document.createElement('input');
         control.type = 'button';
         control.value = 'step+';
+        control.style.margin = '10px';
         control.addEventListener('click', function (e) {
 
             // step the current frame forward
@@ -239,11 +241,24 @@ var scene = (function () {
         control = document.createElement('input');
         control.type = 'button';
         control.value = 'step-';
+        control.style.margin = '10px';
         control.addEventListener('click', function (e) {
 
             // step the current frame forward
             api.step(true);
             api.renderFrame(playbackObj);
+
+        });
+        ui.appendChild(control);
+
+        // make PNG's
+        control = document.createElement('input');
+        control.type = 'button';
+        control.value = 'toPNGCollection';
+        control.style.margin = '10px';
+        control.addEventListener('click', function (e) {
+
+            api.toPNGCollection(playbackObj);
 
         });
         ui.appendChild(control);
