@@ -17,7 +17,7 @@ var scene = (function () {
         forFrame : null,
         img : [],
         parts : {},
-        opacity : .5,
+        opacity : 1,
         canvas : null,
         ctx : null,
         logo : null,
@@ -189,6 +189,13 @@ var scene = (function () {
         if (options.logo) {
 
             state.logo = new Part(options.logo);
+
+        }
+
+        // set global opacity if given
+        if (options.opacity) {
+
+            state.opacity = options.opacity;
 
         }
 
@@ -394,6 +401,7 @@ var scene = (function () {
 
             disp.innerHTML = 'frame: ' + state.frame + '\/' + state.maxFrame;
 
+            7
         }
 
     };

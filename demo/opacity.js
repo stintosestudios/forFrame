@@ -4,7 +4,7 @@ scene({
 
     maxFrame : 50,
 
-    opacity : 0.5,
+    opacity : 0.8,
 
     logo : {
         w : 128,
