@@ -79,6 +79,28 @@ An animation must always include at lest one or more parts. A part is just a box
     ]
 ```
 
+### logo
+
+The logo property was introduced in 1.3.x to provide a way to display a logo on each frame without having to add an aditional part into the parts array.
+
+```js
+    logo : {
+        w : 128,
+        h : 56,
+        x : 512,
+        y : 424,
+        skin : {
+            imgIndex : 3,
+            sx : 0,
+            sy : 0,
+            sw : 128,
+            sh : 56
+        }
+    }
+```
+
+The logo is a Part class instance, and just like any other Part that values can be changed in forFrame methods if desired (this.logo in a forFrame method). 
+
 When defining a part you must at least give an id. If desired you can also set some static values as well, but you can also do so when writing your forFrame method(s). See the Part class section to learn more about parts. 
 
 ### forFrame 
@@ -351,6 +373,8 @@ This method is for exporting all of the frames to a PNG file collection. Combine
 
 It makes use of canvas.blob, and fileSaver.js to get chrome to spit out a PNG file for each frame. The collection on PNG's can then be imported to an applaction that can convert the frames to a video container format. To use it there must be a link to fileSaver.js in the HTML file, and chrome must be started with the "--allow-file-access-from-files" flag if you want to get this to work via the file:// protocol. If you do not use the flag, or host what you are working via http, you will get a tainted canvas error in chrome.
 
+### fix via --allow-file-access-from-files flag in chrome.
+
 To start chrome with the flag, close all chrome windows, then restart chrome from the command line like so:
 
 In windows 10 PowerShell:
@@ -360,6 +384,10 @@ In windows 10 PowerShell:
 Linux:
 
     $ chromium-browser --allow-file-access-from-files
+
+### fix via http:// using the given server.js file that should work with node.js
+
+As of 1.3.x a server.js file is provided in the root name space. If you run this using node in the command line it will host index.html over a local http server. Just start the server by calling "node server.js" in the command line. If everything is working the way it should you can access the index.html file and get PNG exporting working by going to http://http://localhost:8888/ in chrome.
 
 If all goes well you can just call the method in place of scene.play, but make sure that all your images are loaded first. If you are useing an appendRender method you will want to include that. In fact you can used the same object that is used for scene.play, the frameRate property is just ignored.
 
