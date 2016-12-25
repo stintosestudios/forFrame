@@ -59,6 +59,10 @@ The maxFrame property is used to set the number of frames that are to be used in
 
 You can omit this from your options object, a hard coded default of 50 will be applied. 
 
+### opacity
+
+opacity is the global level opacity, as you would exspect the hard coded default is 1.
+
 ### Parts 
 
 An animation must always include at lest one or more parts. A part is just a boxed area that has certain values such as x, y, width, height, and radian (rotation). The animations that I make just involve simple 2d translations, rotations, and scaling of 2d boxed areas. These parts can then then be filled with images, but the main function of forFrame is to work out the geometry of the animation.  
@@ -587,6 +591,10 @@ All parts are just simple box areas, as shuch they have the typical width, heigh
 ### Part.radian 
 
 The rotation of the part in radians.
+
+### Part.opacity
+
+The part level opacity of the part. It overrides state.opacity.
 
 ### Part.skin 
 
