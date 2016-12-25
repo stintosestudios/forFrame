@@ -11,6 +11,7 @@ scene({
         h : 56,
         x : 512,
         y : 424,
+        opacity : 0.3,
         skin : {
             imgIndex : 1,
             sx : 0,

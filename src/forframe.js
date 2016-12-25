@@ -387,6 +387,12 @@ var scene = (function () {
             ctx.save();
             ctx.globalAlpha = state.opacity;
 
+            if (Number(pt.opacity) >= 0) {
+
+                ctx.globalAlpha = pt.opacity;
+
+            }
+
             ctx.drawImage(
                 state.img[skin.imgIndex],
                 skin.sx,
