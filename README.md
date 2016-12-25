@@ -198,7 +198,7 @@ Use this method to create and inject a canvas element that will be used to rende
 
 ### scene.renderFrame
 
-Render a single given frame. You must inject a canvas first in order to use this, you can also give an appendRender and z index value that is useful for displaying additional information. Just like forFrame methods you can access the state via the tis keyword.
+Render a single given frame. You must inject a canvas first in order to use this, you can also give an appendRender and z index value that is useful for displaying additional information. Just like forFrame methods you can access the state via the this keyword.
 
 ```js
     scene.renderFrame(function(ctx){

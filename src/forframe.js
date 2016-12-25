@@ -76,13 +76,38 @@ var scene = (function () {
     // the Part Class.
     var Part = function (values) {
 
+        var defaults = 'id:none;w:32;h:32;x:0;y:0;radian:0;'.split(';'),
+        i = 0,
+        len = defaults.length,
+        current;
+        while (i < len) {
+
+            current = defaults[i].split(':');
+
+            if (current[0]in values) {
+
+                this[current[0]] = values[current[0]];
+
+            } else {
+
+                // else the default value
+
+                this[current[0]] = current[1];
+
+            }
+
+            i += 1;
+
+        }
+
+        /*
         this.id = values.id;
         this.w = values.w;
         this.h = values.h;
-        this.x = 0;
-        this.y = 0;
-        this.radian = 0;
-
+        this.x = values.x;
+        this.y = values.y;
+        this.radian = values.radian;
+         */
         // default that Parts skin to a blank Skin class instance
         this.skin = new Skin(this, values.skin);
 
@@ -353,7 +378,9 @@ var scene = (function () {
         };
 
         if (options === undefined) {
+
             options = {};
+
         }
 
         // test for "saveAs" global as this methods requiers filesaver.js
