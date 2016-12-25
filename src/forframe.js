@@ -19,6 +19,7 @@ var scene = (function () {
         parts : {},
         canvas : null,
         ctx : null,
+        logo : null,
 
         // run the current section forFrame method
         currentSection : function () {
@@ -181,6 +182,13 @@ var scene = (function () {
 
             }
                 ());
+        }
+
+        // setup logo if given
+        if (options.logo) {
+
+            state.logo = new Part(options.logo);
+
         }
 
     };
@@ -347,6 +355,25 @@ var scene = (function () {
             }
 
             ctx.restore();
+
+        }
+
+        // all parts rendered, so render logo if given
+        if (state.logo) {
+
+            pt = state.logo;
+            skin = state.logo.skin;
+
+            ctx.drawImage(
+                state.img[skin.imgIndex],
+                skin.sx,
+                skin.sy,
+                skin.sw,
+                skin.sh,
+                pt.x + Number(skin.xOffset),
+                pt.y + Number(skin.yOffset),
+                pt.w,
+                pt.h);
 
         }
 

@@ -4,6 +4,20 @@ scene({
 
     maxFrame : 100,
 
+    logo : {
+        w : 128,
+        h : 56,
+        x : 512,
+        y : 424,
+        skin : {
+            imgIndex : 3,
+            sx : 0,
+            sy : 0,
+            sw : 128,
+            sh : 56
+        }
+    },
+
     // define some parts
     parts : [{
             id : 'background',
@@ -50,24 +64,6 @@ scene({
             id : 'floor',
             w : 640,
             h : 400
-        }, {
-
-            id : 'logo',
-            w : 128,
-            h : 56,
-            x : 640 - 128,
-            y : 480 - 56,
-
-            skin : {
-
-                imgIndex : 3,
-                sx : 0,
-                sy : 0,
-                sw : 128,
-                sh : 56
-
-            }
-
         }
 
     ],
@@ -186,7 +182,7 @@ scene({
         }
 
         pt.skin.sx = x;
-		pt.skin.sy = 160 * log;
+        pt.skin.sy = 160 * log;
 
     }
 
