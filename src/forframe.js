@@ -370,6 +370,9 @@ var scene = (function () {
             pt = state.logo;
             skin = state.logo.skin;
 
+            ctx.save();
+            ctx.globalAlpha = state.opacity;
+
             ctx.drawImage(
                 state.img[skin.imgIndex],
                 skin.sx,
@@ -380,6 +383,8 @@ var scene = (function () {
                 pt.y + Number(skin.yOffset),
                 pt.w,
                 pt.h);
+
+            ctx.restore();
 
         }
 
