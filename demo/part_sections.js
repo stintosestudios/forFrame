@@ -2,7 +2,7 @@
 
 scene({
 
-    maxFrame : 50,
+    maxFrame : 10,
 
     opacity : 0.8,
 
@@ -75,11 +75,14 @@ scene({
                 sh : 32,
                 appendRender : function (ctx, skin) {
 
-                    console.log('section index: ' + this.sectionIndex);
+                    ctx.fillStyle = 'rgba(0,255,0,0.5)';
 
-                    console.log('section name: ' + this.sectionName);
+                    if (this.sectionName === 'open') {
 
-                    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+                        ctx.fillStyle = 'rgba(0,0,0,0.5)';
+
+                    }
+
                     ctx.fillRect(0, 0, skin.part.w, skin.part.h);
 
                 }

@@ -595,6 +595,11 @@ var scene = (function () {
 
                     saveFrames();
 
+                } else {
+
+                    state.frame = 0;
+                    api.setFrame(0);
+                    api.renderFrame(playbackObj);
                 }
 
             });
