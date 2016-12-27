@@ -1,6 +1,6 @@
 # forframe.js 
 
-<div style="margin-right:auto;margin-left:auto;width:320px;">
+<div style="text-align:center;">
 <img src=https://raw.githubusercontent.com/stintosestudios/forFrame/master/demo/img/logo2_320.gif>
 </div>
 
@@ -64,6 +64,19 @@ You can omit this from your options object, a hard coded default of 50 will be a
 ### opacity
 
 opacity is the global level opacity, as you would exspect the hard coded default is 1.
+
+### viewPort
+
+The viewPort property can be used to set the native resolution of the canvas. The default is 640 x 480;
+
+```js
+    viewPort : {
+
+        w: 320,
+        h: 240
+    
+    }
+```
 
 ### Parts 
 
@@ -536,6 +549,18 @@ This is the method that is to be called in the main forFrame method if sections 
 
 state.currentSection returns whatever may be returned in the current section forFrame method. In the above example a radian value is being returned, the value of which may change based on different expressions from one section to another. 
 
+### state.opacity
+
+The current global opacity value
+
+### state.sectionIndex
+
+The current index in the section timeline array, if useing sections.
+
+## state sectionName
+
+The name of the current forFrame section method if useing sections.
+
 ## The Parts Class. 
 
 A Part class contains values the reflect the current state of a part of an animation, such as position, and size. 
@@ -621,6 +646,44 @@ The s stands fro source, use the source values to define section in the image th
 ### Skin.renderPartBox 
 
 If true the part area will be shown as a red outline. This is useful for when tweaking a skined animation and you want to know where everything is with your parts.
+
+### Skin.appendRender
+
+A appendRender can be defined that will be used to render over the image, or it can also be used in place of an image if desired.
+
+```js
+    // define some parts
+    parts : [{
+            id : 'maintext',
+            w : 128,
+            h : 32,
+            opacity : 1,
+            skin : {
+
+                //renderPartBox : true,
+                imgIndex : 0,
+                sw : 128,
+                sh : 32,
+                appendRender : function (ctx, skin) {
+
+                    ctx.fillStyle = 'rgba(0,255,0,0.5)';
+
+                    if (this.sectionName === 'open') {
+
+                        ctx.fillStyle = 'rgba(0,0,0,0.5)';
+
+                    }
+
+                    ctx.fillRect(0, 0, skin.part.w, skin.part.h);
+
+                }
+
+            }
+
+        }
+
+    ]
+```
 
 ## Legal 
 
