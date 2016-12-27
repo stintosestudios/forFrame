@@ -15,6 +15,7 @@ var scene = (function () {
         sections : {},
         sectionPer : 0,
         sectionIndex : 0,
+        sectionName : '',
         forFrame : null,
         img : [],
         parts : {},
@@ -53,6 +54,8 @@ var scene = (function () {
             var bias = i === 0 ? 0 : timeline[i - 1][1];
 
             this.sectionPer = (this.percentDone - bias) / (timeline[i][1] - bias);
+
+            this.sectionName = this.sections.timeline[this.sectionIndex][0];
 
             // run the current section forFrame method, and return anything it returns.
             return this.sections.forFrame[timeline[i][0]].call(this);

@@ -2,7 +2,7 @@
 
 scene({
 
-    maxFrame : 10,
+    maxFrame : 50,
 
     opacity : 0.8,
 
@@ -37,11 +37,11 @@ scene({
                 var bias = Math.abs((0.5 - this.sectionPer) / 0.5),
                 pt = this.parts['maintext'];
 
-                pt.w = 160 + 160 * bias;
-                pt.h = 32 + 64 * bias;
-                pt.opacity = bias;
-                pt.x = 160 - (pt.w / 2);
-                pt.y = 120 - (pt.h / 2);
+                pt.w = this.viewPort.w * this.sectionPer;
+                pt.h = this.viewPort.h * this.sectionPer;
+                pt.x = this.viewPort.w / 2 - pt.w / 2;
+                pt.y = this.viewPort.h / 2 - pt.h / 2;
+                pt.opacity = 1 - this.sectionPer;
 
             },
 
@@ -49,9 +49,11 @@ scene({
 
                 var pt = this.parts['maintext'];
 
-                pt.x = 0 + 320 * this.sectionPer;
-                pt.w = 128;
-                pt.h = 128;
+                pt.w = this.viewPort.w / 4;
+                pt.h = this.viewPort.h / 4;
+                pt.x = -pt.w + (this.viewPort.w + pt.w) * this.sectionPer;
+                pt.y = this.viewPort.h / 2 - pt.h / 2;
+                pt.opacity = 1;
 
             }
 
@@ -75,6 +77,8 @@ scene({
 
                     console.log('section index: ' + this.sectionIndex);
 
+                    console.log('section name: ' + this.sectionName);
+
                     ctx.fillStyle = 'rgba(0,0,0,0.5)';
                     ctx.fillRect(0, 0, skin.part.w, skin.part.h);
 
@@ -95,16 +99,6 @@ scene({
         bias = Math.abs((0.5 - this.percentDone) / 0.5);
 
         this.currentSection();
-
-        /*
-        pt = this.parts['maintext'];
-        pt.w = 160 + 160 * bias;
-        pt.h = 32 + 64 * bias;
-        pt.opacity = bias;
-        pt.x = 160 - (pt.w / 2);
-        pt.y = 120 - (pt.h / 2);
-
-         */
 
     }
 
