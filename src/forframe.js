@@ -14,6 +14,7 @@ var scene = (function () {
         percentDone : 0,
         sections : {},
         sectionPer : 0,
+        sectionIndex : 0,
         forFrame : null,
         img : [],
         parts : {},
@@ -45,6 +46,9 @@ var scene = (function () {
                 i += 1;
 
             }
+
+            // set the current section index
+            this.sectionIndex = i;
 
             var bias = i === 0 ? 0 : timeline[i - 1][1];
 

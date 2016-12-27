@@ -28,6 +28,39 @@ scene({
         }
     },
 
+    sections : {
+
+        timeline : 'open:50;close:100;',
+
+        forFrame : {
+
+            open : function () {
+
+                var bias = Math.abs((0.5 - this.sectionPer) / 0.5),
+                pt = this.parts['maintext'];
+
+                pt.w = 160 + 160 * bias;
+                pt.h = 32 + 64 * bias;
+                pt.opacity = bias;
+                pt.x = 160 - (pt.w / 2);
+                pt.y = 120 - (pt.h / 2);
+
+            },
+
+            close : function () {
+
+                var pt = this.parts['maintext'];
+
+                pt.x = 0 + 320 * this.sectionPer;
+                pt.w = 128;
+                pt.h = 128;
+
+            }
+
+        }
+
+    },
+
     // define some parts
     parts : [{
             id : 'maintext',
@@ -41,6 +74,8 @@ scene({
                 sw : 128,
                 sh : 32,
                 appendRender : function (ctx, skin) {
+
+                    console.log('section index: ' + this.sectionIndex);
 
                     ctx.fillStyle = 'rgba(0,0,0,0.5)';
                     ctx.fillRect(0, 0, skin.part.w, skin.part.h);
@@ -61,12 +96,17 @@ scene({
         dRadian = Math.PI * 2 / 3,
         bias = Math.abs((0.5 - this.percentDone) / 0.5);
 
+        this.currentSection();
+
+        /*
         pt = this.parts['maintext'];
         pt.w = 160 + 160 * bias;
         pt.h = 32 + 64 * bias;
         pt.opacity = bias;
         pt.x = 160 - (pt.w / 2);
         pt.y = 120 - (pt.h / 2);
+
+         */
 
     }
 
@@ -86,8 +126,8 @@ scene.load(
     var playback = {
         appendRender : function (ctx) {
 
-            ctx.fillStyle = '#ff0000';
-            ctx.fillRect(0, 0, this.viewPort.w / 2, this.viewPort.h / 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, this.viewPort.w, this.viewPort.h);
 
         },
         containerId : 'apparea',
