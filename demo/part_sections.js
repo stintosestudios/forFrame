@@ -89,6 +89,21 @@ scene({
 
             }
 
+        }, {
+            id : 'box',
+            w : 32,
+            h : 32,
+            skin : {
+
+                appendRender : function (ctx, skin) {
+
+                    ctx.fillStyle = '#00ff00';
+
+                    ctx.fillRect(0, 0, skin.part.w, skin.part.h);
+
+                }
+
+            }
         }
 
     ],
@@ -102,6 +117,11 @@ scene({
         bias = Math.abs((0.5 - this.percentDone) / 0.5);
 
         this.currentSection();
+
+        pt = this.parts['box'];
+
+        pt.x = this.viewPort.w - pt.w - this.viewPort.w * this.percentDone;
+        pt.y = this.viewPort.h - pt.h;
 
     }
 

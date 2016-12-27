@@ -1,8 +1,8 @@
 # forframe.js 
 
-<div style="text-align:center;">
+<p style="text-align:center;">
 <img src=https://raw.githubusercontent.com/stintosestudios/forFrame/master/demo/img/logo2_320.gif>
-</div>
+</p>
 
 A simple tool for making animations that will end up being furnished to *.gif, a sprite sheet *.png, ect. 
 
@@ -653,7 +653,10 @@ A appendRender can be defined that will be used to render over the image, or it 
 
 ```js
     // define some parts
-    parts : [{
+    parts : [
+
+        // you can use an append render method to draw ontop of an image skin.
+        {
             id : 'maintext',
             w : 128,
             h : 32,
@@ -680,6 +683,24 @@ A appendRender can be defined that will be used to render over the image, or it 
 
             }
 
+        },
+        
+        // use can use an appendRender methods in place of an image as well
+        {
+            id : 'box',
+            w : 32,
+            h : 32,
+            skin : {
+
+                appendRender : function (ctx, skin) {
+
+                    ctx.fillStyle = '#00ff00';
+
+                    ctx.fillRect(0, 0, skin.part.w, skin.part.h);
+
+                }
+
+            }
         }
 
     ]
