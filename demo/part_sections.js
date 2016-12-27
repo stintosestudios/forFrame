@@ -8,16 +8,14 @@ scene({
 
     viewPort : {
 
-        w : 320,
-        h : 240
+        w : 720,
+        h : 480
 
     },
 
     logo : {
         w : 128,
         h : 56,
-        x : 320 - 128,
-        y : 240 - 56,
         opacity : 0.3,
         skin : {
             imgIndex : 1,

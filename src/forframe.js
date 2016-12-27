@@ -215,13 +215,6 @@ var scene = (function () {
                 ());
         }
 
-        // setup logo if given
-        if (options.logo) {
-
-            state.logo = new Part(options.logo);
-
-        }
-
         // set global opacity if given
         if (options.opacity) {
 
@@ -234,6 +227,21 @@ var scene = (function () {
 
             state.viewPort.w = options.viewPort.w;
             state.viewPort.h = options.viewPort.h;
+
+        }
+
+        // setup logo if given
+        if (options.logo) {
+
+            state.logo = new Part(options.logo);
+
+            if (options.logo.x === undefined) {
+                state.logo.x = state.viewPort.w - state.logo.w;
+            }
+
+            if (options.logo.y === undefined) {
+                state.logo.y = state.viewPort.h - state.logo.h;
+            }
 
         }
 
