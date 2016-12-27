@@ -54,7 +54,7 @@ var scene = (function () {
     // The Skin Class is used to skin a Part with an image
     var Skin = function (part, skinOptions) {
 
-        var defaults = 'imgIndex:-1;xOffset:0;yOffset:0;sx:0;sy:0;sw:32;sh:32;renderPartBox:0;'.split(';'),
+        var defaults = 'imgIndex:-1;xOffset:0;yOffset:0;sx:0;sy:0;sw:32;sh:32;renderPartBox:0;appendRender:none;'.split(';'),
         i = 0,
         len = defaults.length,
         current;
@@ -83,6 +83,26 @@ var scene = (function () {
         }
 
         this.renderPartBox = this.renderPartBox === '0' ? false : true;
+
+        // store a reference to the part that is used.
+        this.part = part;
+
+    };
+
+    // draw and appendRender skin
+    Skin.prototype.draw = function () {
+
+        var ctx = state.ctx;
+
+        ctx.save();
+
+        // draw relative to the part;
+        ctx.translate(-this.part.w / 2, -this.part.h / 2);
+
+        // in the draw function this refers to the current state, and pass the drawing context.
+        this.appendRender.call(state, ctx, this);
+
+        ctx.restore();
 
     };
 
@@ -371,6 +391,12 @@ var scene = (function () {
                 // if no skin just draw a box
 
                 ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
+
+            }
+
+            if (skin.appendRender != 'none') {
+
+                skin.draw();
 
             }
 
