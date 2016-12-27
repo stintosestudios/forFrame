@@ -225,6 +225,14 @@ var scene = (function () {
 
         }
 
+        // set the viewPort if given
+        if (options.viewPort) {
+
+            state.viewPort.w = options.viewPort.w;
+            state.viewPort.h = options.viewPort.h;
+
+        }
+
     };
 
     // inject a canvas into the given id

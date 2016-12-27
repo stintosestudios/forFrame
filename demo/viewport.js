@@ -6,11 +6,18 @@ scene({
 
     opacity : 0.8,
 
+    viewPort : {
+
+        w : 320,
+        h : 240
+
+    },
+
     logo : {
         w : 128,
         h : 56,
-        x : 512,
-        y : 424,
+        x : 320 - 128,
+        y : 240 - 56,
         opacity : 0.3,
         skin : {
             imgIndex : 1,
@@ -55,11 +62,11 @@ scene({
         bias = Math.abs((0.5 - this.percentDone) / 0.5);
 
         pt = this.parts['maintext'];
-        pt.w = 256 + 256 * bias;
-        pt.h = 32 + 128 * bias;
+        pt.w = 160 + 160 * bias;
+        pt.h = 32 + 64 * bias;
         pt.opacity = bias;
-        pt.x = 320 - (pt.w / 2);
-        pt.y = 240 - (pt.h / 2);
+        pt.x = 160 - (pt.w / 2);
+        pt.y = 120 - (pt.h / 2);
 
     }
 
@@ -80,7 +87,7 @@ scene.load(
         appendRender : function (ctx) {
 
             ctx.fillStyle = '#ff0000';
-            ctx.fillRect(0, 0, this.viewPort.w / 2, this.viewPort.h 	/ 2);
+            ctx.fillRect(0, 0, this.viewPort.w / 2, this.viewPort.h / 2);
 
         },
         containerId : 'apparea',
