@@ -376,9 +376,7 @@ var scene = (function () {
 
             pt = state.parts[prop];
 
-            ctx.strokeStyle = '#ffffff';
             ctx.save();
-
             // default to state.opacity
             ctx.globalAlpha = state.opacity;
 
@@ -414,12 +412,6 @@ var scene = (function () {
                     ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
 
                 }
-
-            } else {
-
-                // if no skin just draw a box
-
-                ctx.strokeRect(-pt.w / 2, -pt.h / 2, pt.w, pt.h);
 
             }
 

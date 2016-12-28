@@ -1,6 +1,7 @@
 # forframe.js 
 
-<p style="text-align:center;">
+<p align="center"">
+<br>
 <img src=https://raw.githubusercontent.com/stintosestudios/forFrame/master/demo/img/logo2_320.gif>
 </p>
 
