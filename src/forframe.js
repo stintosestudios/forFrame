@@ -122,7 +122,7 @@ var scene = (function () {
     // the Part Class.
     var Part = function (values) {
 
-        var defaults = 'id:none;w:32;h:32;x:0;y:0;radian:0;opacity:none;'.split(';'),
+        var defaults = 'id:none;w:32;h:32;x:0;y:0;radian:0;opacity:none;forFrame:none;'.split(';'),
         i = 0,
         len = defaults.length,
         current;
@@ -482,6 +482,16 @@ var scene = (function () {
 
         // call the forFrame method;
         state.forFrame.call(state);
+
+        for (var partId in state.parts) {
+
+            if (state.parts[partId].forFrame != 'none') {
+
+                state.parts[partId].forFrame.call(state, state.parts[partId]);
+
+            }
+
+        }
 
     };
 
